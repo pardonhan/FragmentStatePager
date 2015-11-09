@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/check_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/check_question_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="15dip"
+                android:text="越是生理、心理及技术素质好的工人，越不敢冒险违章。（   ）"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/answer_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/a"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/answer_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/b"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/false_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/choose_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/choose_question_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="15dip"
+                android:text="氧含量分析合格数据区间为：（     ）"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/a"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/b"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/c"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/d"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_e"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/e"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/gray_little"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/s_answer_f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginTop="5dip"
+                android:orientation="horizontal" >
+
+                <com.qdjxd.examination.views.CircleTextView
+                    android:layout_width="20dip"
+                    android:layout_height="20dip"
+                    circleColor="#BFBFBF"
+                    android:text="@string/f"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/true_a"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

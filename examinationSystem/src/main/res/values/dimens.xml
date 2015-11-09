@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="padding_30">60dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="work_ticket_grid_image">30dip</dimen>
+
+    <dimen name="add_detail_padding">5dip</dimen>
+    <dimen name="issue_margin">5dip</dimen>
+    <!--    字体字号 -->
+    <dimen name="system_font">16sp</dimen>
+    <!--    字体字号 -->
+    <dimen name="btn_size">18sp</dimen>
+    <!--   票证填写 多行的行高 -->
+    <dimen name="lines_height">85dip</dimen>
+
+    <dimen name="updatebar_height">62.0dip</dimen>
+    <dimen name="updatebar_content_height">60.0dip</dimen>
+    <dimen name="updatebar_padding">10.0dip</dimen>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/autonomous"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <!-- use to Practice -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_bar_DeepSkyBlue" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:padding="15dip"
+            android:src="@drawable/web_browser_back" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal" >
+            
+			<TextView 
+			    android:id="@+id/submit_exam"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:padding="2dip"
+			    android:layout_marginRight="10dip"
+			    android:drawableTop="@drawable/jiakao_header_icon_exam_tijiao_d"
+			    android:text="@string/tijiao"
+			    android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:id="@+id/li_question_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/time_d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dip"
+                    android:contentDescription="@drawable/jiakao_header_icon_exam_clock_d"
+                    android:src="@drawable/jiakao_header_icon_exam_clock_d" />
+
+                <TextView
+                    android:id="@+id/question_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dip"
+                    android:text="@string/q_time"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_question_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/header_practice_card_d"
+                android:text="@string/q_number"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+<!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/activity_exam_autonomous.xml -->

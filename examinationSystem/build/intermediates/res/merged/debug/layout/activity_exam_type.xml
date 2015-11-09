@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_bar_DeepSkyBlue" >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:padding="15dip"
+            android:src="@drawable/web_browser_back" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/TitleTextViewFontStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/margin_15"
+            android:text="@string/specialtype" />
+    </RelativeLayout>
+	<TextView 
+	    android:id="@+id/panduanti_tv"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="15dip"
+	    android:drawableLeft="@drawable/practise_panduanti_day"
+	    android:drawablePadding="20dip"
+	    android:text="@string/panduanti"
+	    android:textSize="18sp"
+	    android:textColor="@color/black"/>
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dip"
+	    android:background="@color/gray_little"/>
+	<TextView 
+	    android:id="@+id/danxuanti_tv"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="15dip"
+	    android:drawableLeft="@drawable/practise_danxuanti_day"
+	    android:drawablePadding="20dip"
+	    android:text="@string/danxuanti"
+	    android:textSize="18sp"
+	    android:textColor="@color/black"/>
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dip"
+	    android:background="@color/gray_little"/>
+	<TextView 
+	    android:id="@+id/duoxuanti_tv"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="15dip"
+	    android:drawableLeft="@drawable/practise_duoxuanti_day"
+	    android:drawablePadding="20dip"
+	    android:text="@string/duoxuanti"
+	    android:textSize="18sp"
+	    android:textColor="@color/black"/>
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="0.5dip"
+	    android:background="@color/gray_little"/>
+</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/activity_exam_type.xml -->

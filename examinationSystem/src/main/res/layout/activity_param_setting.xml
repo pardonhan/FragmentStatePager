@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_bar_DeepSkyBlue" >
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/TitleTextViewFontStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:text="@string/param_setting" />
+
+        <ImageView
+            android:id="@+id/come_back"
+            android:layout_width="45dip"
+            android:layout_height="45dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dip"
+            android:contentDescription="@string/app_name"
+            android:padding="15dip"
+            android:src="@drawable/web_browser_back" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:orientation="horizontal"
+        android:padding="@dimen/add_detail_padding" >
+
+        <TextView
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical|left"
+            android:text="@string/webIp" />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/webIP"
+                style="@style/InputFontStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View style="@style/GrayLineStyle" />
+
+    <View style="@style/WriteLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:orientation="horizontal"
+        android:padding="@dimen/add_detail_padding" >
+
+        <TextView
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical|left"
+            android:text="@string/padType" />
+
+        <EditText
+            android:id="@+id/padType"
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_weight="3"
+            android:enabled="false"
+            android:text="@string/padTypeDefault" />
+    </LinearLayout>
+
+    <View style="@style/GrayLineStyle" />
+
+    <View style="@style/WriteLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:orientation="horizontal"
+        android:padding="@dimen/add_detail_padding" >
+
+        <TextView
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical|left"
+            android:text="@string/padNumber" />
+
+        <EditText
+            android:id="@+id/padNumber"
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_weight="3"
+            android:enabled="false"
+            android:text="@string/padNumberDefault" />
+    </LinearLayout>
+
+    <View style="@style/GrayLineStyle" />
+
+    <View style="@style/WriteLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:orientation="horizontal"
+        android:padding="@dimen/add_detail_padding" >
+
+        <TextView
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical|left"
+            android:text="@string/padVersion" />
+
+        <EditText
+            android:id="@+id/padVersion"
+            style="@style/TextViewFontStyle"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_weight="3"
+            android:enabled="false"
+            android:text="@string/padVersionDefault" />
+    </LinearLayout>
+
+    <View style="@style/GrayLineStyle" />
+
+    <View style="@style/WriteLineStyle" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dip"
+        android:layout_gravity="right"
+        android:background="@drawable/button_left"
+        android:layout_marginTop="15dip"
+        android:layout_marginBottom="20dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:text="保	      存" />
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logout_bg"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    </LinearLayout>
