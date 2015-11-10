@@ -28,6 +28,9 @@ import com.qdjxd.examination.utils.MsgUtil;
 public class AutonomousExamActivity extends BaseActivity{
 	private ViewPager mViewPager;
 	private Dialog m_Dialog;
+
+	private AutoNomousAdapter adapter;
+
 	private List<QuestionInfo> questionInfoList = new ArrayList<QuestionInfo>();
 
 	private List<QuestionFragment> questionFragmentList;
@@ -48,31 +51,21 @@ public class AutonomousExamActivity extends BaseActivity{
 		Intent intent = getIntent();
 		questionInfoList = (ArrayList<QuestionInfo>) intent.getSerializableExtra(QUESTION_INFO_LIST);
 		if(questionInfoList!=null) {
-			for (QuestionInfo item : questionInfoList) {
-				questionFragmentList.add(new QuestionFragment(item));
+			int size = questionInfoList.size();
+			for(int i=0;i<size;i++){
+				questionFragmentList.add(new QuestionFragment(questionInfoList.get(i),(i+1)+""));
 			}
 		}
 		mViewPager = (ViewPager)findViewById(R.id.viewpager);
-
-		mViewPager.setAdapter(new FragmentStatePagerAdapter(manager) {
-			@Override
-			public Fragment getItem(int i) {
-				DebugLog.i(i);
-				return questionFragmentList.get(i);
-			}
-
-			@Override
-			public int getCount() {
-				return questionInfoList.size();
-			}
-		});
+		adapter = new AutoNomousAdapter(manager,questionFragmentList);
+		mViewPager.setAdapter(adapter);
 		mViewPager.setCurrentItem(0);
 	}
 
 	private class AutoNomousAdapter extends FragmentStatePagerAdapter
 		implements ViewPager.OnPageChangeListener{
-		List<QuestionInfo> list = new ArrayList<QuestionInfo>();
-		public AutoNomousAdapter(FragmentManager fm,List<QuestionInfo> list){
+		List<QuestionFragment> list = new ArrayList<QuestionFragment>();
+		public AutoNomousAdapter(FragmentManager fm,List<QuestionFragment> list){
 			super(fm);
 			this.list = list;
 		}
@@ -93,7 +86,7 @@ public class AutonomousExamActivity extends BaseActivity{
 		}
 		@Override
 		public Fragment getItem(int arg0) {
-			return questionFragmentList.get(arg0);
+			return list.get(arg0);
 		}
 
 		//获取要滑动的控件数量，此处是是根据题目数量来确定

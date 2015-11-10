@@ -7,14 +7,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.qdjxd.examination.R;
-import com.qdjxd.examination.utils.DebugLog;
-import com.qdjxd.examination.views.CircleTextView;
 import com.qdjxd.examination.examacitvity.bean.AnswerInfo;
 
 import java.util.List;
 
 /**
  * Created by asus on 2015/11/09.
+ *  问题选项列表
  */
 public class AnswerListAdapter extends ArrayAdapter<AnswerInfo> {
     private Activity activity;
@@ -35,17 +34,38 @@ public class AnswerListAdapter extends ArrayAdapter<AnswerInfo> {
         }
         AnswerInfo answerInfo = getItem(position);
 
-        viewWrapper.label.setText(answerInfo.itemvalue);
+        //viewWrapper.label.setText(answerInfo.itemvalue);
         viewWrapper.text.setText(answerInfo.itemcontent);
+
+        if(answerInfo.itemvalue.equals("A")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_a_n_day), null, null, null);
+        }else if(answerInfo.itemvalue.equals("B")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_b_n_day), null, null, null);
+        }else if(answerInfo.itemvalue.equals("C")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_c_n_day), null, null, null);
+        }else if(answerInfo.itemvalue.equals("D")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_d_n_day), null, null, null);
+        }else if(answerInfo.itemvalue.equals("E")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_e_n_day), null, null, null);
+        }else if(answerInfo.itemvalue.equals("F")){
+            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_f_n_day), null, null, null);
+        }
+
         return view;
     }
     class ViewWrapper {
-        public final CircleTextView label;
+        //public final CircleTextView label;
         public final TextView text;
 
         ViewWrapper(View view){
-            this.label = (CircleTextView)view.findViewById(R.id.s_answer_b);
-            this.text = (TextView)view.findViewById(R.id.s_answerB);
+            //this.label = (CircleTextView)view.findViewById(R.id.s_answer_b);
+            this.text = (TextView)view.findViewById(R.id.item_answer);
         }
     }
 }

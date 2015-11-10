@@ -11,25 +11,28 @@
         android:layout_marginLeft="20dip"
         android:orientation="horizontal">
 
-        <com.qdjxd.examination.views.CircleTextView
-            android:id="@+id/s_answer_b"
-            circleColor="#BFBFBF"
-            android:layout_width="35dip"
-            android:layout_height="35dip"
-            android:layout_gravity="center_vertical"
-            android:text="@string/b"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+        <!--<com.qdjxd.examination.views.CircleTextView-->
+            <!--android:id="@+id/s_answer_b"-->
+            <!--circleColor="#BFBFBF"-->
+            <!--android:layout_width="35dip"-->
+            <!--android:layout_height="35dip"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:text="@string/b"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="16sp" />-->
 
         <TextView
-            android:id="@+id/s_answerB"
+            android:id="@+id/item_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dip"
+            android:drawableLeft="@drawable/jiakao_practise_a_n_day"
+            android:drawablePadding="10dip"
             android:gravity="center_vertical"
             android:singleLine="false"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:text="@string/app_name"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
