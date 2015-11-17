@@ -123,43 +123,6 @@ public class MainActivity extends BaseActivity {
 		
 	}
 
-	private void getExamData(final String typeid) {
-		if(m_Dialog!=null){
-			m_Dialog.show();
-		}else {
-			m_Dialog = MsgUtil.ShowLoadDialog(MainActivity.this, "请稍后", "正在加载数据...");
-		}
-		new Thread(){
-			@Override
-			public void run() {
-				DebugLog.i("查询数据");
-				ArrayList<QuestionInfo> _List;// = new ArrayList<QuestionInfo>();
-				_List = DataBaseUtils.getRandomQuestionInfo(MainActivity.this, typeid);
-				if(_List.size()>0){
-					handler.sendMessage(handler.obtainMessage(1, _List));
-				}else{
-					handler.sendEmptyMessage(2);
-				}
-			}
-		}.start();
-	}
-	Handler handler  = new Handler(){
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			if (msg.what==1){
-				if(m_Dialog!=null){
-					m_Dialog.dismiss();
-				}
-				questionInfoList.clear();
-				questionInfoList.addAll((ArrayList<QuestionInfo>)msg.obj);
-				Intent intent = new Intent();
-				intent.setClass(MainActivity.this, AutonomousExamActivity.class);
-				intent.putExtra(AutonomousExamActivity.QUESTION_INFO_LIST, (Serializable) questionInfoList);
-				startActivity(intent);
-			}
-		}
-	};
 	//首页饼图点击事件
 	OnPieceClickListener pListener = new OnPieceClickListener() {
 		@Override
@@ -186,8 +149,8 @@ public class MainActivity extends BaseActivity {
 				break;
 			case 3:
 				//自主考试
-				getExamData(null);
-
+				intent.setClass(MainActivity.this, AutonomousExamActivity.class);
+				startActivity(intent);
 				break;
 			case 4:
 				//顺序练习
