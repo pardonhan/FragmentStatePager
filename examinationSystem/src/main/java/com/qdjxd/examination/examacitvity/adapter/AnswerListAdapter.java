@@ -1,26 +1,56 @@
 package com.qdjxd.examination.examacitvity.adapter;
 
 import android.app.Activity;
+import android.os.Debug;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.qdjxd.examination.R;
 import com.qdjxd.examination.examacitvity.bean.AnswerInfo;
+import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
+import com.qdjxd.examination.utils.DebugLog;
+import com.qdjxd.examination.utils.PublicUtils;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by asus on 2015/11/09.
  *  问题选项列表
  */
-public class AnswerListAdapter extends ArrayAdapter<AnswerInfo> {
+public class AnswerListAdapter extends BaseAdapter {
     private Activity activity;
+    public QuestionInfo questionInfo;
+    private final static String A = "A";
+    private final static String B = "B";
+    private final static String C = "C";
+    private final static String D = "D";
+    private final static String E = "E";
+    private final static String F = "F";
     //private
-    public AnswerListAdapter(Activity activity,List<AnswerInfo> answerInfoList){
-        super(activity, R.layout.activity_activity_exam_answer_list_item,answerInfoList);
-        this.activity =activity;
+    public AnswerListAdapter(Activity activity,QuestionInfo questionInfo){
+        this.activity = activity;
+        this.questionInfo = questionInfo;
+    }
+
+
+    @Override
+    public int getCount() {
+        return questionInfo.answerItem.size();
+    }
+
+    @Override
+    public AnswerInfo getItem(int position) {
+        return questionInfo.answerItem.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -31,40 +61,83 @@ public class AnswerListAdapter extends ArrayAdapter<AnswerInfo> {
             view = activity.getLayoutInflater().inflate(R.layout.activity_activity_exam_answer_list_item,null);
             viewWrapper = new ViewWrapper(view);
             view.setTag(viewWrapper);
-        }
-        AnswerInfo answerInfo = getItem(position);
-
-        //viewWrapper.label.setText(answerInfo.itemvalue);
-        viewWrapper.text.setText(answerInfo.itemcontent);
-
-        if(answerInfo.itemvalue.equals("A")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_a_n_day), null, null, null);
-        }else if(answerInfo.itemvalue.equals("B")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_b_n_day), null, null, null);
-        }else if(answerInfo.itemvalue.equals("C")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_c_n_day), null, null, null);
-        }else if(answerInfo.itemvalue.equals("D")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_d_n_day), null, null, null);
-        }else if(answerInfo.itemvalue.equals("E")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_e_n_day), null, null, null);
-        }else if(answerInfo.itemvalue.equals("F")){
-            viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_f_n_day), null, null, null);
+        }else{
+            viewWrapper = (ViewWrapper) view.getTag();
         }
 
+        AnswerInfo answerInfo = questionInfo.answerItem.get(position);
+        //DebugLog.i(answerInfo.itemcontent);
+        //DebugLog.i("***"+viewWrapper.text);
+        viewWrapper.text.setText(answerInfo.itemcontent);//选项内容
+
+        if(answerInfo.itemvalue.equals(A)){
+            //如果所选答案如当前选项一样
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                //判断是否正确
+                checkQuestion(viewWrapper.text,questionInfo.selectAnswer,questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_a_n_day), null, null, null);
+            }
+        }else if(answerInfo.itemvalue.equals(B)){
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                checkQuestion(viewWrapper.text,questionInfo.selectAnswer,questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_b_n_day), null, null, null);
+            }
+        }else if(answerInfo.itemvalue.equals(C)){
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_c_n_day), null, null, null);
+            }
+        }else if(answerInfo.itemvalue.equals(D)){
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_d_n_day), null, null, null);
+            }
+        }else if(answerInfo.itemvalue.equals(E)){
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_e_n_day), null, null, null);
+            }
+        }else if(answerInfo.itemvalue.equals(F)){
+            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
+            }else {
+                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_f_n_day), null, null, null);
+            }
+        }
         return view;
     }
-    class ViewWrapper {
-        //public final CircleTextView label;
-        public final TextView text;
 
+
+    /**
+     * 对选项结果进行判断
+     * @param textView
+     * @param selectAs
+     * @param rightAs
+     */
+    private void checkQuestion(TextView textView,Set<String> selectAs,Set<String> rightAs){
+        //如果所选答案是正确答案
+        if(PublicUtils.isSetEqual(selectAs,rightAs)){
+            textView.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_true_day), null, null, null);
+        }else{
+            textView.setCompoundDrawablesWithIntrinsicBounds(
+                    activity.getResources().getDrawable(R.drawable.jiakao_practise_false_day), null, null, null);
+        }
+    }
+    class ViewWrapper {
+        public final TextView text;
         ViewWrapper(View view){
-            //this.label = (CircleTextView)view.findViewById(R.id.s_answer_b);
             this.text = (TextView)view.findViewById(R.id.item_answer);
         }
     }
