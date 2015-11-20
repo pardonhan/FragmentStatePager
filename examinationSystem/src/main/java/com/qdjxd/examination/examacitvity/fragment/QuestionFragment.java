@@ -1,6 +1,7 @@
 package com.qdjxd.examination.examacitvity.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,13 +27,12 @@ import java.util.List;
 
 /**
  * Created by asus on 2015/11/05.
+ *
  */
 public class QuestionFragment extends ListFragment {
     public static final String TAG = QuestionFragment.class.getSimpleName();
     private View questionView;
-
-   // private  ListView listView;
-
+    private View buttonView;
     private AnswerListAdapter adapter;
     private QuestionInfo questionInfo;
     private List<AnswerInfo> answerItem;
@@ -47,7 +48,7 @@ public class QuestionFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //DebugLog.i(TAG);
+        DebugLog.i(TAG);
         Activity activity = getActivity();
         select = new boolean[]{false,false,false,false,false};
         if(answerItem.size()==0){
@@ -72,29 +73,34 @@ public class QuestionFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setListAdapter(null);
-        /*listView =  this.getListView();
-        listView.setDividerHeight(0);
-        listView.setCacheColorHint(0);*/
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
         //问题显示页面
         questionView = inflater.inflate(R.layout.activity_exam_autonomous_item,null);
+        buttonView = inflater.inflate(R.layout.activity_exam_answer_button,null);
+        Button button = (Button) buttonView.findViewById(R.id.submitAs);
         //题目内容
         TextView questionTx = (TextView) questionView.findViewById(R.id.choose_question_content);
         questionTx.setText(num + "." + questionInfo.qcontent);
-        //对题目类型进行判断,更改题目类型图标
-        if(questionInfo.typeid.equals("1")){
+
+        //对题目类型进行判断,更改题目类型图标 1 单选，2 多选 3 判断
+        if(("1").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
                     getResources().getDrawable(R.drawable.practise_danxuanti_day), null, null, null);
-        }else if(questionInfo.typeid.equals("2")){
+        }else if(("2").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
                     getResources().getDrawable(R.drawable.practise_duoxuanti_day), null, null, null);
-        }else if (questionInfo.typeid.equals("3")){
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(listener);
+        }else if (("3").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
                     getResources().getDrawable(R.drawable.practise_panduanti_day), null, null, null);
         }
+
+        //listView.setAdapter(adapter);
         setListAdapter(adapter);
+
         getListView().addHeaderView(questionView);
+        getListView().addFooterView(buttonView);
         getListView().setCacheColorHint(0);
         getListView().setDividerHeight(0);
         getListView().setSelector(R.color.white);
@@ -105,26 +111,31 @@ public class QuestionFragment extends ListFragment {
                 //DebugLog.i("onListItemClick" + position);
                 TextView tx = (TextView) view.findViewById(R.id.item_answer);
                 int length = select.length;
-                for (int i = 0; i < length; i++) {
-                    //对当前点击项目做出判断
-                    if ((i + 1) == position) {
-                        if (select[i]) {
-                            //DebugLog.i("点击当前选中项，取消选择");
-                            setTextView(tx, position, select[i]);
-                            select[i] = false;
-                        } else {
-                            //DebugLog.i("初次点击选中");
-                            setTextView(tx, position, select[i]);
-                            select[i] = true;
+                if(!(("2").equals(questionInfo.typeid))) {
+                    //非多选题，进行答题时的逻辑
+                    for (int i = 0; i < length; i++) {
+                        //对当前点击项目做出判断
+                        if ((i + 1) == position) {
+                            if (select[i]) {
+                                //DebugLog.i("点击当前选中项，取消选择");
+                                setTextView(tx, position, select[i]);
+                                select[i] = false;
+                            } else {
+                                //DebugLog.i("初次点击选中");
+                                setTextView(tx, position, select[i]);
+                                select[i] = true;
+                            }
                         }
+                        //如果之前被选中（select[i]是true）,但不是当前点击项
+                        if ((i + 1) != position && select[i]) {
+                            //DebugLog.i("点击其他项目，取消之前选择");
+                           // setTextView(tx, position, select[i]);
+                            select[i] = false;
+                        }
+                        // DebugLog.i(select[i]);
                     }
-                    //如果之前被选中（select[i]是true）,但不是当前点击项
-                    if ((i + 1) != position && select[i]) {
-                        //DebugLog.i("点击其他项目，取消之前选择");
-                        setTextView(tx, position, select[i]);
-                        select[i] = false;
-                    }
-                   // DebugLog.i(select[i]);
+                }else{
+                    // 多选题
 
                 }
                 //记录选项
@@ -143,12 +154,21 @@ public class QuestionFragment extends ListFragment {
                         if(questionInfo.selectAnswer!=null) {
                             adapter.questionInfo = questionInfo;
                             adapter.notifyDataSetChanged();
+
                         }
                     }
                 },400);
             }
         });
     }
+
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+        }
+    };
     @Override
     public void onPause() {
         super.onPause();
@@ -157,7 +177,7 @@ public class QuestionFragment extends ListFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        DebugLog.i("onAttach(*****)");
+
     }
 
     private void setTextView(TextView tx,int position,boolean flag){
