@@ -10,17 +10,6 @@
         android:layout_marginBottom="5dip"
         android:layout_marginLeft="20dip"
         android:orientation="horizontal">
-
-        <!--<com.qdjxd.examination.views.CircleTextView-->
-            <!--android:id="@+id/s_answer_b"-->
-            <!--circleColor="#BFBFBF"-->
-            <!--android:layout_width="35dip"-->
-            <!--android:layout_height="35dip"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:text="@string/b"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="16sp" />-->
-
         <TextView
             android:id="@+id/item_answer"
             android:layout_width="wrap_content"
