@@ -15,11 +15,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qdjxd.examination.R;
+import com.qdjxd.examination.baseInfo.CurrentInfo;
 import com.qdjxd.examination.examacitvity.AutonomousExamActivity;
 import com.qdjxd.examination.examacitvity.adapter.AnswerListAdapter;
 import com.qdjxd.examination.examacitvity.bean.AnswerInfo;
 import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
+import com.qdjxd.examination.examacitvity.database.DataBaseUtils;
 import com.qdjxd.examination.utils.DebugLog;
+import com.qdjxd.examination.utils.PublicUtils;
+import com.qdjxd.examination.utils.SharedPreferencesHelper;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -31,6 +35,7 @@ import java.util.List;
  */
 public class QuestionFragment extends ListFragment {
     public static final String TAG = QuestionFragment.class.getSimpleName();
+
     private View questionView;
     private View buttonView;
     private AnswerListAdapter adapter;
@@ -112,52 +117,79 @@ public class QuestionFragment extends ListFragment {
                 TextView tx = (TextView) view.findViewById(R.id.item_answer);
                 int length = select.length;
                 if(!(("2").equals(questionInfo.typeid))) {
-                    //非多选题，进行答题时的逻辑
-                    for (int i = 0; i < length; i++) {
-                        //对当前点击项目做出判断
-                        if ((i + 1) == position) {
-                            if (select[i]) {
-                                //DebugLog.i("点击当前选中项，取消选择");
-                                setTextView(tx, position, select[i]);
-                                select[i] = false;
-                            } else {
-                                //DebugLog.i("初次点击选中");
-                                setTextView(tx, position, select[i]);
-                                select[i] = true;
+                    DebugLog.i("questionInfo.wrongModel="+questionInfo.wrongModel);
+                    //更改点击项
+                    if(questionInfo.wrongModel==3){
+                        setTextView(tx, position, select[position-1]);
+                        select[position-1] = true;
+
+                        //记录选项
+                        for (int i = 0; i < length; ++i) {
+                            //DebugLog.i("记录选项");
+                            String ans = ((char) (65 + i)) + "";
+                            if (select[i] && !questionInfo.selectAnswer.contains(ans)) {
+                                questionInfo.selectAnswer.add(ans);
+                            } else if (!select[i] && questionInfo.selectAnswer.contains(ans)) {
+                                questionInfo.selectAnswer.remove(ans);
                             }
                         }
-                        //如果之前被选中（select[i]是true）,但不是当前点击项
-                        if ((i + 1) != position && select[i]) {
-                            //DebugLog.i("点击其他项目，取消之前选择");
-                           // setTextView(tx, position, select[i]);
-                            select[i] = false;
-                        }
-                        // DebugLog.i(select[i]);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (questionInfo.selectAnswer.size()>0) {
+                                    if(questionInfo.selectAnswer.size()>0) {
+                                        if (PublicUtils.isSetEqual(questionInfo.selectAnswer, questionInfo.answer)) {
+                                            questionInfo.wrongModel = 1;
+                                        } else {
+                                            questionInfo.wrongModel = 0;
+                                        }
+                                    }
+                                    adapter.questionInfo = questionInfo;
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        }, 400);
                     }
                 }else{
+                    DebugLog.i("questionInfo.wrongModel="+questionInfo.wrongModel);
                     // 多选题
+                    if(questionInfo.wrongModel==3){
+                        for (int i = 0; i < length; i++) {
+                            //对当前点击项目做出判断
+                            if ((i + 1) == position) {
+                                if (select[i]) {
+                                    //DebugLog.i("点击当前选中项，取消选择");
+                                    setTextView(tx, position, select[i]);
+                                    select[i] = false;
+                                } else {
+                                    //DebugLog.i("初次点击选中");
+                                    setTextView(tx, position, select[i]);
+                                    select[i] = true;
+                                }
+                            }
 
-                }
-                //记录选项
-                for (int i = 0; i < length; ++i) {
-                    //DebugLog.i("记录选项");
-                    String ans = ((char) (65 + i)) + "";
-                    if (select[i] && !questionInfo.selectAnswer.contains(ans)) {
-                        questionInfo.selectAnswer.add(ans);
-                    } else if (!select[i] && questionInfo.selectAnswer.contains(ans)) {
-                        questionInfo.selectAnswer.remove(ans);
-                    }
-                }
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(questionInfo.selectAnswer!=null) {
-                            adapter.questionInfo = questionInfo;
-                            adapter.notifyDataSetChanged();
-
+                            //如果之前被选中（select[i]是true）,但不是当前点击项
+                            /*if ((i + 1) != position && select[i]) {
+                                //DebugLog.i("点击其他项目，取消之前选择");
+                                setTextView(tx, position, select[i]);
+                                select[i] = false;
+                            }*/
+                            DebugLog.i(select[i]);
                         }
+                        //记录选项
+                        for (int i = 0; i < length; ++i) {
+                            //DebugLog.i("记录选项");
+                            String ans = ((char) (65 + i)) + "";
+                            if (select[i] && !questionInfo.selectAnswer.contains(ans)) {
+                                questionInfo.selectAnswer.add(ans);
+                            } else if (!select[i] && questionInfo.selectAnswer.contains(ans)) {
+                                questionInfo.selectAnswer.remove(ans);
+                            }
+                        }
+
                     }
-                },400);
+
+                }
             }
         });
     }
@@ -165,21 +197,59 @@ public class QuestionFragment extends ListFragment {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            switch (v.getId()){
+                case R.id.submitAs:
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            DebugLog.i("listener");
+                            if (questionInfo.selectAnswer.size()>0) {
+                                if(questionInfo.selectAnswer.size()>0) {
+                                    if (PublicUtils.isSetEqual(questionInfo.selectAnswer, questionInfo.answer)) {
+                                        questionInfo.wrongModel = 1;
+                                    } else {
+                                        questionInfo.wrongModel = 0;
+                                    }
+                                }
+                                adapter.questionInfo = questionInfo;
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }, 400);
+                    break;
+            }
 
         }
     };
     @Override
     public void onPause() {
         super.onPause();
+        DebugLog.i("onPause:"+questionInfo.qcontent);
+        if(questionInfo.wrongModel!=3&&questionInfo.selectAnswer.size()>0){
+            CurrentInfo currentInfo = new CurrentInfo();
+            SharedPreferencesHelper sp = SharedPreferencesHelper.getDefault(getActivity());
+            currentInfo.setAutoExam(sp,Integer.parseInt(num));
+            new Thread(){
+                public void run() {
+
+                    DataBaseUtils.saveExamResult(getActivity(),
+                            questionInfo, "JXD7_EX_RANDOMRESULT", "1");
+                }
+            }.start();
+        }
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
 
+    /**
+     *
+     * @param tx 当前选项
+     * @param position  选项标志位
+     * @param flag  是否选中：flag==true执行else，flag==false执行if
+     */
     private void setTextView(TextView tx,int position,boolean flag){
         switch (position){
             case 1:

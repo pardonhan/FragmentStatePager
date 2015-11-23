@@ -1,21 +1,17 @@
 package com.qdjxd.examination.examacitvity.adapter;
 
 import android.app.Activity;
-import android.os.Debug;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.qdjxd.examination.R;
 import com.qdjxd.examination.examacitvity.bean.AnswerInfo;
 import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
-import com.qdjxd.examination.utils.DebugLog;
 import com.qdjxd.examination.utils.PublicUtils;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,6 +31,7 @@ public class AnswerListAdapter extends BaseAdapter {
     public AnswerListAdapter(Activity activity,QuestionInfo questionInfo){
         this.activity = activity;
         this.questionInfo = questionInfo;
+
     }
 
 
@@ -58,7 +55,7 @@ public class AnswerListAdapter extends BaseAdapter {
         View view = convertView;
         ViewWrapper viewWrapper =null;
         if(view == null){
-            view = activity.getLayoutInflater().inflate(R.layout.activity_activity_exam_answer_list_item,null);
+            view = activity.getLayoutInflater().inflate(R.layout.activity_exam_answer_list_item,null);
             viewWrapper = new ViewWrapper(view);
             view.setTag(viewWrapper);
         }else{
@@ -70,49 +67,73 @@ public class AnswerListAdapter extends BaseAdapter {
         //DebugLog.i("***"+viewWrapper.text);
         viewWrapper.text.setText(answerInfo.itemcontent);//选项内容
 
-        if(answerInfo.itemvalue.equals(A)){
-            //如果所选答案如当前选项一样
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
+        if (answerInfo.itemvalue.contains(A)) {
+            //如果所选答案如当前选项数量一样
+            if (questionInfo.selectAnswer.contains(A)) {
                 //判断是否正确
-                checkQuestion(viewWrapper.text,questionInfo.selectAnswer,questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_a_n_day), null, null, null);
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,A);
+            } else {
+                if(questionInfo.answer.contains(A)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,A);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_a_n_day), null, null, null);
+                }
             }
-        }else if(answerInfo.itemvalue.equals(B)){
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
-                checkQuestion(viewWrapper.text,questionInfo.selectAnswer,questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_b_n_day), null, null, null);
+        } else if (answerInfo.itemvalue.contains(B)) {
+            if (questionInfo.selectAnswer.contains(B)) {
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,B);
+            } else {
+                if(questionInfo.answer.contains(B)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,B);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_b_n_day), null, null, null);
+                }
             }
-        }else if(answerInfo.itemvalue.equals(C)){
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
-                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_c_n_day), null, null, null);
+        } else if (answerInfo.itemvalue.contains(C)) {
+            if (questionInfo.selectAnswer.contains(C)) {
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,C);
+            } else {
+                if(questionInfo.answer.contains(C)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,C);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_c_n_day), null, null, null);
+                }
             }
-        }else if(answerInfo.itemvalue.equals(D)){
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
-                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_d_n_day), null, null, null);
+        } else if (answerInfo.itemvalue.contains(D)) {
+            if (questionInfo.selectAnswer.contains(D)) {
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,D);
+            } else {
+                if(questionInfo.answer.contains(D)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,D);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_d_n_day), null, null, null);
+                }
             }
-        }else if(answerInfo.itemvalue.equals(E)){
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
-                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_e_n_day), null, null, null);
+        } else if (answerInfo.itemvalue.contains(E)) {
+            if (questionInfo.selectAnswer.contains(E)) {
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,E);
+            } else {
+                if(questionInfo.answer.contains(E)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,E);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_e_n_day), null, null, null);
+                }
             }
-        }else if(answerInfo.itemvalue.equals(F)){
-            if(questionInfo.selectAnswer.contains(answerInfo.itemvalue)){
-                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer);
-            }else {
-                viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
-                        activity.getResources().getDrawable(R.drawable.jiakao_practise_f_n_day), null, null, null);
+        } else if (answerInfo.itemvalue.contains(F)) {
+            if (questionInfo.selectAnswer.contains(F)) {
+                checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,F);
+            } else {
+                if(questionInfo.answer.contains(F)&&questionInfo.wrongModel!=3){
+                    checkQuestion(viewWrapper.text, questionInfo.selectAnswer, questionInfo.answer,F);
+                }else {
+                    viewWrapper.text.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_f_n_day), null, null, null);
+                }
             }
         }
         return view;
@@ -125,14 +146,34 @@ public class AnswerListAdapter extends BaseAdapter {
      * @param selectAs
      * @param rightAs
      */
-    private void checkQuestion(TextView textView,Set<String> selectAs,Set<String> rightAs){
-        //如果所选答案是正确答案
-        if(PublicUtils.isSetEqual(selectAs,rightAs)){
-            textView.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_true_day), null, null, null);
-        }else{
-            textView.setCompoundDrawablesWithIntrinsicBounds(
-                    activity.getResources().getDrawable(R.drawable.jiakao_practise_false_day), null, null, null);
+    private void checkQuestion(TextView textView,Set<String> selectAs,Set<String> rightAs,String check){
+
+        if (rightAs.contains(check)) {
+            if (selectAs.contains(check)) {
+                textView.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_true_day), null, null, null);
+                textView.setTextColor(activity.getResources().getColor(R.color.rightAnswer));
+            } else {
+                if(questionInfo.typeid.equals("2")){
+                    //没有选择该选项
+                    textView.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_true_day), null, null, null);
+                    textView.setTextColor(activity.getResources().getColor(R.color.wrongAnswer));
+                }else {
+                    //没有选择该选项
+                    textView.setCompoundDrawablesWithIntrinsicBounds(
+                            activity.getResources().getDrawable(R.drawable.jiakao_practise_true_day), null, null, null);
+                    textView.setTextColor(activity.getResources().getColor(R.color.rightAnswer));
+                }
+            }
+        } else {
+            //该选项不是正确选项
+            if (selectAs.contains(check)) {
+                //但是选择了该选项
+                textView.setCompoundDrawablesWithIntrinsicBounds(
+                        activity.getResources().getDrawable(R.drawable.jiakao_practise_false_day), null, null, null);
+                textView.setTextColor(activity.getResources().getColor(R.color.wrongAnswer));
+            }
         }
     }
     class ViewWrapper {

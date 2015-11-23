@@ -15,6 +15,7 @@ public class CurrentInfo {
 	public static final String SINGLE_CHOOSE = "SINGLE_CHOOSE";//单选题
 	public static final String MULTY_CHOOSE="MULTY_CHOOSE";//多选题
 	public static final String TRUEORFALSE="TRUEORFALSE";//判断题
+	public static final String AUTOEXAM = "AUTOEXAM";
 	
 	
 	public void setRandomExam(SharedPreferencesHelper sp,int current){
@@ -48,5 +49,12 @@ public class CurrentInfo {
 	}
 	public Integer getTrueInteger(SharedPreferencesHelper sp){
 		return sp.getIntValue(TRUEORFALSE);
+	}
+
+	public void setAutoExam(SharedPreferencesHelper sp,int current){
+		sp.putIntValue(AUTOEXAM, current);
+	}
+	public Integer getAutoExam(SharedPreferencesHelper sp){
+		return sp.getIntValue(AUTOEXAM);
 	}
 }
