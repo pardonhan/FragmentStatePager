@@ -40,6 +40,10 @@ import com.qdjxd.examination.utils.DebugLog;
 import com.qdjxd.examination.utils.MsgUtil;
 import com.qdjxd.examination.utils.PopupWindowDialog;
 
+/**
+ * 自主答题主页面--AutonomousExamActivity
+ *
+ */
 public class AutonomousExamActivity extends BaseActivity {
     public static final String TAG = "AutonomousExamActivity";
     public static final String QUESTION_INFO_LIST = "QUESTION_INFO_LIST";

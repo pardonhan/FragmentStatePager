@@ -7,7 +7,7 @@
 	    android:id="@+id/grid_btn"
 	    android:layout_width="40dip"
 	    android:layout_height="40dip"
-	    android:background="@drawable/btn_zhuti_default_n"
+	    android:background="@drawable/gird_view_style"
 	    android:layout_gravity="center"
 	    android:textColor="@color/black"
         android:textSize="16sp"/>

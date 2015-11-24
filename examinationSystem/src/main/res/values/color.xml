@@ -22,4 +22,6 @@
 	<color name="red">#CD3333</color>
 	<color name="cl_color">#BFBFBF</color>
 	<color name="gray_deep">#B0B0B0</color>
+    <color name="rightAnswer">#53C4C0</color>
+    <color name="wrongAnswer">#F25E5E</color>
 </resources>

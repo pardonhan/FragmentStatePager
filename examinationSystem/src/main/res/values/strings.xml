@@ -57,7 +57,7 @@
     <string name="searchquestion">问题查询</string>
     <string name="search">搜索</string>
     <!-- &#8230; 表示三个点 ... -->
-    <string name="searchTip">请输入文字&#8230;</string>
+    <string name="searchTip">请输入关键字&#8230;</string>
     <string name="specialtype">专项练习</string>
     <string name="panduanti">判断题</string>
     <string name="danxuanti">单项选择题</string>

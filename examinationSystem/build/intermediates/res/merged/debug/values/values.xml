@@ -25,8 +25,10 @@
     <color name="light_gray">#D3D3D3</color>
     <color name="line_gray">#FFECECEE</color>
     <color name="red">#CD3333</color>
+    <color name="rightAnswer">#53C4C0</color>
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="wrongAnswer">#F25E5E</color>
     <declare-styleable name="CircleImageView"><attr format="dimension" name="border_width"/><attr format="color" name="border_color"/><attr format="boolean" name="border_overlay"/></declare-styleable>
     <declare-styleable name="SlidingMenu"><attr name="rightPadding"/></declare-styleable>
     <!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/values/dimens.xml -->
@@ -102,7 +104,7 @@
     <string name="sace_password">记住密码</string>
     <string name="save_usercode">记住用户名</string>
     <string name="search">搜索</string>
-    <string name="searchTip">请输入文字…</string>
+    <string name="searchTip">请输入关键字…</string>
     <string name="searchquestion">问题查询</string>
     <string name="singname">用户名</string>
     <string name="specialtype">专项练习</string>
