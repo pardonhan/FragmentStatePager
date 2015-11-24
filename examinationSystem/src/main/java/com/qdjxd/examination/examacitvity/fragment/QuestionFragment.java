@@ -168,12 +168,6 @@ public class QuestionFragment extends ListFragment {
                                 }
                             }
 
-                            //如果之前被选中（select[i]是true）,但不是当前点击项
-                            /*if ((i + 1) != position && select[i]) {
-                                //DebugLog.i("点击其他项目，取消之前选择");
-                                setTextView(tx, position, select[i]);
-                                select[i] = false;
-                            }*/
                             DebugLog.i(select[i]);
                         }
                         //记录选项
