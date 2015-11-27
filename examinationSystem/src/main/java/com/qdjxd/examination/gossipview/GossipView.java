@@ -25,28 +25,28 @@ import android.view.View;
 public class GossipView extends View {
 	
     public class Point {
-    	public float x;
-    	public float y;   	 
-    	public Point (float x , float y){
-    		this.x = x;
-    		this.y = y;
-    	}
-    } 
-    
-    public interface OnPieceClickListener {
+		public float x;
+		public float y;
+		public Point (float x , float y){
+			this.x = x;
+			this.y = y;
+		}
+	}
+
+	public interface OnPieceClickListener {
         void onPieceClick(int whitchPiece);
     }
     
 	private RectF mOuterArcRectangle = new RectF();
 	private RectF mInnerArcRectangle = new RectF();
-	private float mOuterArcRadius;
+	private float mOuterArcRadius;//外扇形的半径
 	private float mInnerArcRadius;
 	private Paint mOuterArcPaint;
 	private Paint mInnerArcPaint;
-	private Paint mOuterTextPaint;
+	private Paint mOuterTextPaint;//外扇形文字的大小
 	private Paint mNumberTextPaint;
 	private Paint mProgressPaint;
-	private float outArctrokeWidth;
+	private float outArctrokeWidth;//外扇形的厚度
 	private float mInnerArctrokeWidth;
 	private int mPieceNumber = 6;
 	private int mPieceDegree = 360/mPieceNumber;
@@ -57,6 +57,7 @@ public class GossipView extends View {
 	private int mSelectIndex = -2;
 	private int mNumber;
 	private String mTextStr;
+	//扇形区域颜色
 	private int[] outArcColor = {0xff0597d2 ,0xff49b956 , 0xffcc324b , 0xff1a4e95 , 0xff55bc75 , 0xffe55f3a}; 
 	private Context mContext;
 	private SweepGradient mSweepGradient;
@@ -68,6 +69,7 @@ public class GossipView extends View {
 	private static int HOME_NUMBER_TEXT_SIZE = 20;
 	private static float mScale = 0; // Used for supporting different screen densities
 	private OnPieceClickListener mListener;
+
 	public GossipView(Context context) {
 		super(context);
 		init(context , null, 0);
@@ -85,7 +87,6 @@ public class GossipView extends View {
 
 	
 	private void init(Context c , AttributeSet attrs , int defStyle) {
-		
 		mContext = c;
         if (mScale == 0) {
             mScale = getContext().getResources().getDisplayMetrics().density;
@@ -116,18 +117,18 @@ public class GossipView extends View {
 		
 		mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mProgressPaint.setStyle(Paint.Style.STROKE);
-		
 	}
 	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		DebugLog.i("onDraw()");
 		mOuterBackGroud.draw(canvas);
 		for(int i = 0;i < mPieceNumber ; i++){
 			drawArc(i , canvas);
 		}
 		if(mSelectIndex == -1){
-			DebugLog.i("mSelectIndex = "+mSelectIndex);
+			DebugLog.i("mSelectIndex = " + mSelectIndex);
 			mInnerBackGroud.setState(PRESSED_FOCUSED_STATE_SET);
 		}else{
 			mInnerBackGroud.setState(EMPTY_STATE_SET);
@@ -141,11 +142,11 @@ public class GossipView extends View {
 		if(mNumber == 0){
 			canvas.save();
 			canvas.rotate(progressAnimateStartAngle, getOriginal().x, getOriginal().y);
-			canvas.drawArc(mInnerArcRectangle, 0 , 360, false, mProgressPaint);		
+			canvas.drawArc(mInnerArcRectangle, 0 , 360, false, mProgressPaint);
 			canvas.restore();
 		}else{
 			mInnerArcPaint.setColor(0xfff39700);
-			canvas.drawArc(mInnerArcRectangle, -90, (360*mNumber/9000), false, mInnerArcPaint);			
+			canvas.drawArc(mInnerArcRectangle, -90, (360*mNumber/9000), false, mInnerArcPaint);
 		}
 
 		Rect rect = new Rect();
@@ -163,16 +164,17 @@ public class GossipView extends View {
 		}else{
 			mOuterArcPaint.setColor(outArcColor[index]);
 		}
-		float radious  = ((float)mWidth - (float)outArctrokeWidth) / 2 - padding ;
-		
+		//半径
+		float radius  = ((float)mWidth - outArctrokeWidth) / 2 - padding ;
+		DebugLog.i("radius = " + radius);
 		float midDegree = startdegree + ( mPieceDegree  - mDividerDegree) /2 ;
-		//DebugLog.i("midDegree->"+midDegree);
-		double x  = radious * Math.cos(midDegree * Math.PI/180);
-		double y  = radious * Math.sin(midDegree  * Math.PI/180);
+		DebugLog.i("midDegree->"+midDegree);
+		double x  = radius * Math.cos(midDegree * Math.PI/180);
+		double y  = radius * Math.sin(midDegree  * Math.PI/180);
 		x = x + getOriginal().x;
 		y = y + getOriginal().y;
 		//绘制弧线
-		canvas.drawArc(mOuterArcRectangle, startdegree, mPieceDegree  - mDividerDegree,false , mOuterArcPaint);
+		canvas.drawArc(mOuterArcRectangle, startdegree, mPieceDegree - mDividerDegree, false, mOuterArcPaint);
 		Rect rect = new Rect();
 		mOuterTextPaint.getTextBounds(items.get(index).getTitle(), 0, items.get(index).getTitle().length(), rect); 
 		int txWidth  = rect.width();
@@ -185,20 +187,26 @@ public class GossipView extends View {
 		int index = -2;
 		float absdy = Math.abs(p.y - getOriginal().y);
 		float absdx = Math.abs(p.x - getOriginal().x);
-		if( absdx * absdx + absdy * absdy < ((float)mWidth/2 - outArctrokeWidth - overTouchDistance - padding) * ( (float)mWidth/2 - outArctrokeWidth - overTouchDistance - padding )){
+		float absdxy = absdx * absdx + absdy * absdy;
+		//中心圆圈区域
+		if( absdxy < ((float)mWidth/2 - outArctrokeWidth - overTouchDistance - padding) * ( (float)mWidth/2 - outArctrokeWidth - overTouchDistance - padding )){
 			return -1;
 		}
+
 		double dx = Math.atan2(p.y - getOriginal().y, p.x - getOriginal().x);
 		float fDegree = (float) (dx / (2 * Math.PI) * 360);
 		fDegree = (fDegree + 360) % 360;
 		int start =  - (mPieceDegree - mDividerDegree) / 2 ;
-		DebugLog.i("fDegree =" +fDegree);
+		float mWidths = ((float)mWidth/ 2 )*((float)mWidth/ 2);
 		for(int i = 0 ; i < mPieceNumber ; i++){
 			int end = start + mPieceDegree  - mDividerDegree;
+			//判断角度，TODO 还应该有判断半径的
 			if( start < fDegree &&  fDegree < end){
-				index = i;
+				if(absdxy < mWidths) {
+					index = i;
+				}
 			}
-			start = mPieceDegree * (i + 1) - (mPieceDegree - mDividerDegree) / 2;;
+			start = mPieceDegree * (i + 1) - (mPieceDegree - mDividerDegree) / 2;
 		}
 		return index;
 	}
