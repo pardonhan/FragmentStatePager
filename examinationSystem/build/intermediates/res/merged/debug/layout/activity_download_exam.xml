@@ -14,4 +14,4 @@
         android:clickable="false" >
     </ListView>
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/activity_download_exam.xml -->
+</LinearLayout>

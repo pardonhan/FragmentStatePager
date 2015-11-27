@@ -37,4 +37,4 @@
 	    android:layout_height="1dip"
 	    android:padding="5dip"
 	    android:background="@color/gray"/>
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/listview_question_content.xml -->
+</LinearLayout>

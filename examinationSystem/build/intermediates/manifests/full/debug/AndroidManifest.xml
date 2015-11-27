@@ -17,13 +17,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/test_paper"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.qdjxd.examination.Splash_Screen"
+            android:name="com.qdjxd.examination.MainActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -34,11 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.qdjxd.examination.MainActivity"
+        <!--
+            <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        -->
         <activity
             android:name="com.qdjxd.examination.LoginActivity"
             android:screenOrientation="portrait"
@@ -109,6 +112,30 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name="com.qdjxd.examination.infoactivity.TipExamActivity"
+            android:label="@string/title_activity_tip_exam"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.qdjxd.examination.infoactivity.RecordExamActivity"
+            android:label="@string/title_activity_record_exam"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.qdjxd.examination.infoactivity.MyWrongExamActivity"
+            android:label="@string/title_activity_my_wrong_exam"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.qdjxd.examination.infoactivity.CollectExamActivity"
+            android:label="@string/title_activity_collect_exam"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

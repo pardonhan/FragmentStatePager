@@ -147,7 +147,6 @@ public class AnswerListAdapter extends BaseAdapter {
      * @param rightAs
      */
     private void checkQuestion(TextView textView,Set<String> selectAs,Set<String> rightAs,String check){
-
         if (rightAs.contains(check)) {
             if (selectAs.contains(check)) {
                 textView.setCompoundDrawablesWithIntrinsicBounds(

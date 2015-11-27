@@ -10,4 +10,4 @@
         android:startOffset="-1"
         android:repeatMode="restart"
         android:repeatCount="-1"/>
-</set><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/anim/loading_animation.xml -->
+</set>

@@ -7,7 +7,10 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import android.content.Context;
@@ -80,6 +83,8 @@ public class DataBaseUtils {
 	 * @return
 	 */
 	public static ArrayList<QuestionInfo> getRandomQuestionInfo(Context context,String typeid){
+		String[] ans = {"正确","错误"};
+		String[] iValue= {"1","0"};
 		ArrayList<QuestionInfo> qList = new ArrayList<QuestionInfo>();
 		String sql ="";
 		if(typeid!=null) {
@@ -117,6 +122,14 @@ public class DataBaseUtils {
 						qf.answerItem.add(af);
 					}
 					css.close();
+				}else{
+					for(int i=0;i<2;i++){
+						AnswerInfo af = new AnswerInfo();
+						af.questionid = qf.questionid;
+						af.itemvalue = iValue[i];
+						af.itemcontent = ans[i];
+						qf.answerItem.add(af);
+					}
 				}
 				qList.add(qf);
 			}
@@ -296,7 +309,7 @@ public class DataBaseUtils {
 		DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_LOCAL);
 		db.openDataBase();
 		StringBuffer sb = new StringBuffer("INSERT INTO JXD7_EX_RESULT(ID,EXAMNAME) VALUES(");
-		sb.append("'"+UUID.randomUUID().toString().toUpperCase()+"',");
+		sb.append("'" + UUID.randomUUID().toString().toUpperCase() + "',");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sb.append("'"+sdf.format(new Date())+"')");
 		DebugLog.v(sb);
@@ -337,5 +350,88 @@ public class DataBaseUtils {
 		}
 		db.close();
 	}
-	
+
+	/**
+	 *
+	 * @param context
+	 * @param _List
+	 * @param tableName
+	 */
+	public static void deleteExamResult(Context context,List<QuestionInfo> _List,String tableName){
+		DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_LOCAL);
+		db.openDataBase();
+		for(QuestionInfo questionInfo:_List){
+			DebugLog.i("questionInfo.wrongModel-->"+questionInfo.wrongModel);
+			if(questionInfo.wrongModel!=3){
+				DebugLog.i(questionInfo.questionid);
+				String deleteSql = "DELETE FROM "+tableName+" WHERE QUESTIONID = '"+questionInfo.questionid+"'";
+				DebugLog.i(deleteSql);
+				db.execNonQuery(deleteSql);
+			}
+		}
+		//db.execNonQuery("DELETE FROM "+tableName);
+		db.close();
+	}
+
+	public static Map<String,String> selectNumbers(Context context){
+		int allNum = 0;
+		Map<String,String> map = new HashMap<String, String>();
+		//获取题目总数 begin
+		DataBaseHelper db = new DataBaseHelper(context,DataBaseHelper.DB_NAME_BASE);
+		db.openDataBase();
+		String sql = "SELECT COUNT(*) NUMBER FROM JXD7_EX_QUESTION";
+		Cursor cs = db.queryData(sql);
+		if(cs.getCount()>0){
+			cs.moveToFirst();
+			allNum= Integer.parseInt(cs.getString(cs.getColumnIndex("NUMBER")));
+			//map.put("allNum",allNum);
+			cs.close();
+		}
+		db.close();
+		//获取题目总数 end
+
+		//获取已经答题数目 begin
+		DataBaseHelper dbh = new DataBaseHelper(context,DataBaseHelper.DB_NAME_LOCAL);
+		dbh.openDataBase();
+		Cursor cs2;
+		//正确的数量
+		String sqlRight = "SELECT COUNT(*) NUMBER FROM JXD7_EX_RANDOMRESULT WHERE WRONGMODEL = 1";
+		cs2 = dbh.queryData(sqlRight);
+		if(cs2.getCount()>0){
+			cs2.moveToFirst();
+			String right_num = cs2.getString(cs2.getColumnIndex("NUMBER"));
+			map.put("right_num",right_num);
+			cs2.close();
+		}else{
+			map.put("right_num","0");
+		}
+		//答错的数量
+		String sqlWrong = "SELECT COUNT(*) NUMBER FROM JXD7_EX_RANDOMRESULT WHERE WRONGMODEL = 0";
+		cs2 = dbh.queryData(sqlWrong);
+		if(cs2.getCount()>0){
+			cs2.moveToFirst();
+			String wrong_num = cs2.getString(cs2.getColumnIndex("NUMBER"));
+			map.put("wrong_num",wrong_num);
+			cs2.close();
+		}else{
+			map.put("wrong_num","0");
+		}
+		//收藏的数量
+		String sqlCollect = "SELECT COUNT(*) NUMBER FROM JXD7_EX_COLLECTQ";
+		cs2 = dbh.queryData(sqlCollect);
+		if(cs2.getCount()>0){
+			cs2.moveToFirst();
+			String wrong_num = cs2.getString(cs2.getColumnIndex("NUMBER"));
+			map.put("collect_num",wrong_num);
+			cs2.close();
+		}else{
+			map.put("collect_num","0");
+		}
+		dbh.close();
+		int ansNum = Integer.parseInt(map.get("right_num"))+Integer.parseInt(map.get("wrong_num"));
+		map.put("undone_num",(allNum - ansNum)+"");
+		//获取已经答题数目 end
+		return map;
+	}
+
 }

@@ -4,4 +4,3 @@
     <item android:drawable="@drawable/but_sub_pressed" android:state_pressed="true"></item>
     <item android:drawable="@drawable/but_sub_normal"> </item>
 </selector>
-<!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/drawable/submit_btn.xml -->

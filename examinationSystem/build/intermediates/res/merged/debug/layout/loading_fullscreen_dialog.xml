@@ -14,4 +14,4 @@
         android:textColor="@color/gray"
         android:textSize="16sp" />
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/loading_fullscreen_dialog.xml -->
+</LinearLayout>

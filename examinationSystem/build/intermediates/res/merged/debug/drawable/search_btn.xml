@@ -3,4 +3,4 @@
     <item android:drawable="@drawable/search_pressed" android:state_selected="true"></item>
     <item android:drawable="@drawable/search_pressed" android:state_pressed="true"></item>
     <item android:drawable="@drawable/search"> </item>
-</selector><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/drawable/search_btn.xml -->
+</selector>

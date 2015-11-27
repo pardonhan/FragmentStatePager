@@ -46,4 +46,4 @@
                 android:topRightRadius="5dp" />
         </shape>
     </item>
-</selector><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/drawable/button_left.xml -->
+</selector>

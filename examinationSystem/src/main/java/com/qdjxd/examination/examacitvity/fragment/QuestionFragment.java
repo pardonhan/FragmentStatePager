@@ -100,20 +100,15 @@ public class QuestionFragment extends ListFragment {
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
                     getResources().getDrawable(R.drawable.practise_panduanti_day), null, null, null);
         }
-
-        //listView.setAdapter(adapter);
         setListAdapter(adapter);
-
         getListView().addHeaderView(questionView);
         getListView().addFooterView(buttonView);
         getListView().setCacheColorHint(0);
         getListView().setDividerHeight(0);
         getListView().setSelector(R.color.white);
-
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //DebugLog.i("onListItemClick" + position);
                 TextView tx = (TextView) view.findViewById(R.id.item_answer);
                 int length = select.length;
                 if(!(("2").equals(questionInfo.typeid))) {
@@ -122,7 +117,6 @@ public class QuestionFragment extends ListFragment {
                     if(questionInfo.wrongModel==3){
                         setTextView(tx, position, select[position-1]);
                         select[position-1] = true;
-
                         //记录选项
                         for (int i = 0; i < length; ++i) {
                             //DebugLog.i("记录选项");
@@ -151,7 +145,6 @@ public class QuestionFragment extends ListFragment {
                         }, 400);
                     }
                 }else{
-                    DebugLog.i("questionInfo.wrongModel="+questionInfo.wrongModel);
                     // 多选题
                     if(questionInfo.wrongModel==3){
                         for (int i = 0; i < length; i++) {
@@ -167,7 +160,6 @@ public class QuestionFragment extends ListFragment {
                                     select[i] = true;
                                 }
                             }
-
                             DebugLog.i(select[i]);
                         }
                         //记录选项
@@ -180,9 +172,7 @@ public class QuestionFragment extends ListFragment {
                                 questionInfo.selectAnswer.remove(ans);
                             }
                         }
-
                     }
-
                 }
             }
         });
@@ -225,7 +215,6 @@ public class QuestionFragment extends ListFragment {
             currentInfo.setAutoExam(sp,Integer.parseInt(num));
             new Thread(){
                 public void run() {
-
                     DataBaseUtils.saveExamResult(getActivity(),
                             questionInfo, "JXD7_EX_RANDOMRESULT", "1");
                 }

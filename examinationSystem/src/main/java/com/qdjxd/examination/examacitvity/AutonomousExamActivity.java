@@ -1,19 +1,13 @@
 package com.qdjxd.examination.examacitvity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Fragment;
 import android.os.Message;
-//import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -27,7 +21,6 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.qdjxd.examination.BaseActivity;
@@ -37,8 +30,11 @@ import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
 import com.qdjxd.examination.examacitvity.database.DataBaseUtils;
 import com.qdjxd.examination.examacitvity.fragment.QuestionFragment;
 import com.qdjxd.examination.utils.DebugLog;
-import com.qdjxd.examination.utils.MsgUtil;
 import com.qdjxd.examination.utils.PopupWindowDialog;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * 自主答题主页面--AutonomousExamActivity
@@ -52,6 +48,7 @@ public class AutonomousExamActivity extends BaseActivity {
     private Dialog m_Dialog;
     private AutoNomousAdapter adapter;
     private List<QuestionInfo> questionInfoList = new ArrayList<QuestionInfo>();
+    private List<QuestionInfo> questionInfoList1 = new ArrayList<QuestionInfo>();
     private List<QuestionFragment> questionFragmentList;
     private LinearLayout li_down;//grid_view页面
     private TextView tv_questionNum;
@@ -59,6 +56,7 @@ public class AutonomousExamActivity extends BaseActivity {
     private ExamGridAdapter egadapter;
     private PopupWindow pwMyPopWindow;// popupwindow
     private PopupWindowDialog popDialog;//no next practice dialog
+    private PopupWindowDialog startPopDialog;//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +89,14 @@ public class AutonomousExamActivity extends BaseActivity {
         }else {
             mViewPager.setCurrentItem(0);
         }
+        startPopDialog = new PopupWindowDialog(AutonomousExamActivity.this,"是否继续上次答题，确定继续，取消重新开始");
+        startPopDialog.btn_ok.setText("继续答题");
+        startPopDialog.btn_ok.setOnClickListener(listenerT);
+        startPopDialog.btn_cancel.setText("重新开始");
+        startPopDialog.btn_cancel.setOnClickListener(listenerT);
         getExamData(null);
         mViewPager.setOnPageChangeListener(pListener);
+        //最后一题时提示
         popDialog = new PopupWindowDialog(AutonomousExamActivity.this, null);
         popDialog.btn_ok.setOnClickListener(listener);
         popDialog.btn_cancel.setOnClickListener(listener);
@@ -101,24 +105,17 @@ public class AutonomousExamActivity extends BaseActivity {
     ViewPager.OnPageChangeListener pListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int i, float v, int i1) {
-            //DebugLog.i(i + "$$*" + v + "*$$" + i1);
             //页面滑动时调用此方法： arg0：当前页面；arg1:滑动偏移量；arg2：滑动偏移像素
-            /*if((i+1)==questionInfoList.size()){
-                popDialog.popupWindow.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
-			}*/
         }
 
         @Override
         public void onPageSelected(int i) {
-            //DebugLog.i(i);
             tv_questionNum.setText((mViewPager.getCurrentItem() + 1) + "/" + questionInfoList.size());
-            //DebugLog.i(tv_questionNum.getText());
         }
 
         @Override
         public void onPageScrollStateChanged(int i) {
             //arg0 有三中状态（0 未做 .1 滑动中.2 滑动完）
-            //DebugLog.i(i);
             if (i == 1) {
                 if ((mViewPager.getCurrentItem() + 1) == questionInfoList.size()) {
                     popDialog.popupWindow.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
@@ -128,11 +125,6 @@ public class AutonomousExamActivity extends BaseActivity {
     };
 
     private void getExamData(final String type_id) {
-        if (m_Dialog != null) {
-            m_Dialog.show();
-        } else {
-            m_Dialog = MsgUtil.ShowLoadDialog(AutonomousExamActivity.this, "请稍后", "正在加载数据...");
-        }
         new Thread() {
             @Override
             public void run() {
@@ -158,6 +150,12 @@ public class AutonomousExamActivity extends BaseActivity {
                 }
                 questionInfoList.clear();
                 questionInfoList.addAll((ArrayList<QuestionInfo>) msg.obj);
+                if(ci.getAutoExam(sp)!=0) {
+                    startPopDialog.popupWindow.showAtLocation(mViewPager, Gravity.BOTTOM, 0, 0);
+                }else{
+                    handler.sendEmptyMessage(3);
+                }
+            }else if(msg.what == 3){
                 if (questionInfoList != null) {
                     int size = questionInfoList.size();
                     for (int i = 0; i < size; i++) {
@@ -171,6 +169,31 @@ public class AutonomousExamActivity extends BaseActivity {
                     mViewPager.setCurrentItem(0);
                 }
                 tv_questionNum.setText((mViewPager.getCurrentItem() + 1) + "/" + questionInfoList.size());
+            }else if(msg.what==4){
+                //清楚答题信息，清除sharepreference信息
+                questionInfoList1.clear();
+                questionInfoList1.addAll(questionInfoList);
+                for(int i= 0;i<questionInfoList.size();i++){
+                    questionInfoList.get(i).wrongModel=3;
+                    questionInfoList.get(i).selectAnswer.clear();
+                }
+                new Thread(){
+                    @Override
+                    public void run() {
+                        DebugLog.i("删除答题信息");
+                        DataBaseUtils.deleteExamResult(AutonomousExamActivity.this,questionInfoList1,"JXD7_EX_RANDOMRESULT");
+                    }
+                }.start();
+                ci.setAutoExam(sp,0);
+                if (questionInfoList != null) {
+                    int size = questionInfoList.size();
+                    for (int i = 0; i < size; i++) {
+                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + ""));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                mViewPager.setCurrentItem(0);
+                tv_questionNum.setText((mViewPager.getCurrentItem() + 1) + "/" + questionInfoList.size());
             }
         }
     };
@@ -180,8 +203,6 @@ public class AutonomousExamActivity extends BaseActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_ok:
-                    //current = 0;
-                    //showExam();
                     popDialog.popupWindow.dismiss();
                     break;
                 case R.id.tv_question_num:
@@ -193,7 +214,23 @@ public class AutonomousExamActivity extends BaseActivity {
             }
         }
     };
-
+    OnClickListener listenerT = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                //点击确定，直接继续答题
+                case R.id.btn_ok:
+                    handler.sendEmptyMessage(3);
+                    startPopDialog.popupWindow.dismiss();
+                    break;
+                //点击取消重新开始
+                case R.id.btn_cancel:
+                    handler.sendEmptyMessage(4);
+                    startPopDialog.popupWindow.dismiss();
+                    break;
+            }
+        }
+    };
     private void initPopupWindow() {
         LayoutInflater inflater = (LayoutInflater) AutonomousExamActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.activity_gridview_exam, null);

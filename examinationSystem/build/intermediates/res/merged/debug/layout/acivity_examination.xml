@@ -11,4 +11,4 @@
         android:background="@color/white" >
     </com.qdjxd.examination.views.MyViewFlipper>
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/acivity_examination.xml -->
+</LinearLayout>

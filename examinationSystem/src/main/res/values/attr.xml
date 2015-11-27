@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <attr name="rightPadding" format="dimension" />
-
     <declare-styleable name="SlidingMenu">
         <attr name="rightPadding" />
     </declare-styleable>
@@ -11,5 +9,7 @@
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="GossipView">
 
+    </declare-styleable>
 </resources>

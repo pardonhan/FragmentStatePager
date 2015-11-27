@@ -72,4 +72,4 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"/>
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/layout/activity_download_exam_item.xml -->
+</LinearLayout>

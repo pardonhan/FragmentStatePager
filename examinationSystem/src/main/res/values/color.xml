@@ -18,10 +18,13 @@
 	<color name="dialog_text_color">#ff133e68</color>
 	<color name="bottom_bar_blue">#FF0F4871</color>
 	<color name="button_line_orange">#FFFC6512</color>
+    <color name="yellow">#FFB401</color>
 	<color name="green">#76EE00</color>
 	<color name="red">#CD3333</color>
+    <color name="cardinal">#f82e25</color>
 	<color name="cl_color">#BFBFBF</color>
 	<color name="gray_deep">#B0B0B0</color>
     <color name="rightAnswer">#53C4C0</color>
     <color name="wrongAnswer">#F25E5E</color>
+    <color name="num_color">#3FA6E7</color>
 </resources>
