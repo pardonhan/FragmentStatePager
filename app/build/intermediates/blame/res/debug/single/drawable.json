@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttoncenterselect.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttoncenterselect.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiocenter.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiocenter.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttonleft.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttonleft.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttonleftselect.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttonleftselect.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttonright.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttonright.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttonrightselect.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttonrightselect.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radioleft.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radioleft.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\tab_indicator_holo.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\tab_indicator_holo.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radioright.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radioright.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\radiobuttoncenter.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\app\\src\\main\\res\\drawable\\radiobuttoncenter.xml"
+    }
+]

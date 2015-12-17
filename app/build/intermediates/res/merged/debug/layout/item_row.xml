@@ -20,4 +20,4 @@
         android:layout_toRightOf="@+id/item_row_img"
         android:textSize="14sp"/>
 
-</RelativeLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/layout/item_row.xml -->
+</RelativeLayout>

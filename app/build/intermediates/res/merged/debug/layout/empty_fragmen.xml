@@ -11,4 +11,4 @@
         android:layout_height="wrap_content"
         android:text="empty fragment" />
     
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/layout/empty_fragmen.xml -->
+</LinearLayout>

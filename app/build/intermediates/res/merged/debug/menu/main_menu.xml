@@ -13,4 +13,4 @@
 		android:showAsAction="ifRoom|withText"
 		android:title="Send" />
 	
-</menu><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/menu/main_menu.xml -->
+</menu>

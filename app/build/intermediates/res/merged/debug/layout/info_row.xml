@@ -24,4 +24,4 @@
         android:text="text of info"
         android:textSize="14sp" />
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/layout/info_row.xml -->
+</LinearLayout>

@@ -14,4 +14,4 @@
 	<item
 		android:state_checked="false"
 		android:drawable="@drawable/radiobuttonleft" />
-</selector><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/drawable/radioleft.xml -->
+</selector>

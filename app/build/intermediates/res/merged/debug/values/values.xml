@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
     <string name="app_name">FragmentSample</string>
     <string name="hello">Hello World, Android_FragmentSampleActivity!</string>
-    <!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/values/styles.xml -->
-    <eat-comment/>
     <style name="MyActionBarStyle" parent="@android:style/Widget.Holo.ActionBar">
 		<item name="android:background">#FFFFFF</item>
 	</style>

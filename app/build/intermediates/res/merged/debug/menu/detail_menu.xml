@@ -18,4 +18,4 @@
 		android:showAsAction="ifRoom|withText"
 		android:title="Delete" />
 	
-</menu><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/menu/detail_menu.xml -->
+</menu>

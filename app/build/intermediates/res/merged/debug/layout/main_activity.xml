@@ -16,4 +16,4 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-</RelativeLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/layout/main_activity.xml -->
+</RelativeLayout>

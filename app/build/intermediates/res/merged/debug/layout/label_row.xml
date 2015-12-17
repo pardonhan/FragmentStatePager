@@ -22,4 +22,4 @@
         android:text="label"
         android:textSize="14sp" />
 
-</LinearLayout><!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/app/src/main/res/layout/label_row.xml -->
+</LinearLayout>

@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\common_edittext.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\common_edittext.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\popupwindow_shap.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\popupwindow_shap.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\login_btn.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\login_btn.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\dialog_content_bg.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\dialog_content_bg.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\search_btn.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\search_btn.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\button_left.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\button_left.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\circlebt_blue.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\circlebt_blue.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\dialog_head_bg.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\dialog_head_bg.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\write_corner_bluestroke_bg.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\write_corner_bluestroke_bg.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\textview_toast_style.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\textview_toast_style.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\submit_btn.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\submit_btn.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\gird_view_style.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\gird_view_style.xml"
+    },
+    {
+        "merged": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\build\\intermediates\\res\\merged\\debug\\drawable\\home_score_bg_selector.xml",
+        "source": "G:\\AndroidStudioProjects\\Android_FragmentSample1\\examinationSystem\\src\\main\\res\\drawable\\home_score_bg_selector.xml"
+    }
+]
