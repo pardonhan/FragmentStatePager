@@ -61,7 +61,7 @@ import com.qdjxd.examination.views.MyDialog;
 public class PracticeExamActivity extends BaseActivity {
 	
     private int allTime = 60*30;//倒计时的整个时间数 可根据试卷指定时间更改
-    		  // 总数          当前题目                114行           正确数量              错误数量                剩余数量        用时
+    		  // 总数  当前题目 114行    正确数量   错误数量  剩余数量    用时
     private int count,current,li_size,rightNum,wrongNum,emptyNum,useTime;
 	private Dialog m_Dialog;
 	private ImageView img_practise;

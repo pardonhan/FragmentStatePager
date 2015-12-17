@@ -44,10 +44,15 @@ public class QuestionFragment extends ListFragment {
     private final List<String> list = Arrays.asList("正确","错误");
     private String num;
     private boolean[] select;
-    public QuestionFragment(QuestionInfo qf,String num){
+    private String type_id;
+    private String exam_type;
+
+    public QuestionFragment(QuestionInfo qf,String num,String type_id,String exam_type){
         this.questionInfo = qf;
         this.answerItem = qf.answerItem;
         this.num = num;
+        this.type_id = type_id;
+        this.exam_type = exam_type;
     }
 
     @Override
@@ -216,7 +221,7 @@ public class QuestionFragment extends ListFragment {
             new Thread(){
                 public void run() {
                     DataBaseUtils.saveExamResult(getActivity(),
-                            questionInfo, "JXD7_EX_RANDOMRESULT", "1");
+                            questionInfo, type_id, exam_type);
                 }
             }.start();
         }

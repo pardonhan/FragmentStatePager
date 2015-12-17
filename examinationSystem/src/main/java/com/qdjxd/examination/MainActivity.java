@@ -11,7 +11,6 @@
  */
 package com.qdjxd.examination;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,8 +26,7 @@ import com.qdjxd.examination.examacitvity.OrdinalExamActivity;
 import com.qdjxd.examination.examacitvity.PracticeExamActivity;
 import com.qdjxd.examination.examacitvity.QuestionSelectActivity;
 import com.qdjxd.examination.examacitvity.RandomExamActivity;
-import com.qdjxd.examination.examacitvity.SpecialTypeExamActivity;
-import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
+import com.qdjxd.examination.examacitvity.specialtype.SpecialTypeExamActivity;
 import com.qdjxd.examination.examacitvity.database.DataBaseUtils;
 import com.qdjxd.examination.gossipview.GossipItem;
 import com.qdjxd.examination.gossipview.GossipView;
@@ -37,7 +35,6 @@ import com.qdjxd.examination.infoactivity.CollectExamActivity;
 import com.qdjxd.examination.infoactivity.MyWrongExamActivity;
 import com.qdjxd.examination.infoactivity.RecordExamActivity;
 import com.qdjxd.examination.infoactivity.TipExamActivity;
-import com.qdjxd.examination.utils.DataBaseHelper;
 import com.qdjxd.examination.utils.DebugLog;
 import com.qdjxd.examination.utils.MsgUtil;
 import com.qdjxd.examination.views.CircleImageView;

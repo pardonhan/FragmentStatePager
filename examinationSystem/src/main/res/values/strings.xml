@@ -74,8 +74,4 @@
     <string name="right_exam">答对题</string>
     <string name="undone_exam">未做题</string>
     <string name="collect_exam">收藏题</string>
-    <string name="title_activity_tip_exam">TipExamActivity</string>
-    <string name="title_activity_record_exam">RecordExamActivity</string>
-    <string name="title_activity_my_wrong_exam">MyWrongExamActivity</string>
-    <string name="title_activity_collect_exam">CollectExamActivity</string>
 </resources>

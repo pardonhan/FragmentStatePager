@@ -98,7 +98,7 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
-            android:name="com.qdjxd.examination.examacitvity.SpecialTypeExamActivity"
+            android:name="com.qdjxd.examination.examacitvity.specialtype.SpecialTypeExamActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -114,28 +114,37 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name="com.qdjxd.examination.infoactivity.TipExamActivity"
-            android:label="@string/title_activity_tip_exam"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.qdjxd.examination.infoactivity.RecordExamActivity"
-            android:label="@string/title_activity_record_exam"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.qdjxd.examination.infoactivity.MyWrongExamActivity"
-            android:label="@string/title_activity_my_wrong_exam"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.qdjxd.examination.infoactivity.CollectExamActivity"
-            android:label="@string/title_activity_collect_exam"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+        <activity
+            android:name="com.qdjxd.examination.examacitvity.specialtype.SpecialTypeMultiActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.qdjxd.examination.examacitvity.specialtype.SpecialTypeJudgeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="com.qdjxd.examination.examacitvity.specialtype.SpecialTypeSingleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
     </application>
 
 </manifest>

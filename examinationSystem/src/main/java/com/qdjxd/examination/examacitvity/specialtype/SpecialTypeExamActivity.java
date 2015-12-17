@@ -1,4 +1,4 @@
-package com.qdjxd.examination.examacitvity;
+package com.qdjxd.examination.examacitvity.specialtype;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.qdjxd.examination.BaseActivity;
 import com.qdjxd.examination.R;
-import com.qdjxd.examination.utils.DebugLog;
+
 /**
  * 专项练习 用户选择练习项目
  * @author asus
@@ -37,25 +37,25 @@ public class SpecialTypeExamActivity extends BaseActivity {
 			Intent intent = new Intent();
 			switch (v.getId()) {
 			case R.id.back:
-				DebugLog.v("finish");
+				//DebugLog.v("finish");
 				finish();
 				break;
 			case R.id.panduanti_tv:
-				DebugLog.v("判断题");
-				intent.setClass(SpecialTypeExamActivity.this, RandomExamActivity.class);
-				intent.putExtra("typeid", "3");
+				//DebugLog.v("判断题");
+				intent.setClass(SpecialTypeExamActivity.this, SpecialTypeJudgeActivity.class);
+				//intent.putExtra("type_id", "3");
 				startActivity(intent);
 				break;
 			case R.id.danxuanti_tv:
-				DebugLog.v("单选题");
-				intent.setClass(SpecialTypeExamActivity.this, RandomExamActivity.class);
-				intent.putExtra("typeid", "1");
+				//DebugLog.v("单选题");
+				intent.setClass(SpecialTypeExamActivity.this, SpecialTypeSingleActivity.class);
+				//intent.putExtra("type_id", "1");
 				startActivity(intent);
 				break;
 			case R.id.duoxuanti_tv:
-				DebugLog.v("多选题");
-				intent.setClass(SpecialTypeExamActivity.this, RandomExamActivity.class);
-				intent.putExtra("typeid", "2");
+				//DebugLog.v("多选题");
+				intent.setClass(SpecialTypeExamActivity.this, SpecialTypeMultiActivity.class);
+				//intent.putExtra("type_id", "2");
 				startActivity(intent);
 				break;
 			default:

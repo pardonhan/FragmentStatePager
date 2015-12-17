@@ -171,7 +171,7 @@ public class RandomExamActivity extends BaseActivity {
 			@Override
 			public void run() {
 				ArrayList<QuestionInfo> _List = new ArrayList<QuestionInfo>();
-				_List = DataBaseUtils.getRandomQuestionInfo(RandomExamActivity.this,typeid);
+				_List = DataBaseUtils.getRandomQuestionInfo(RandomExamActivity.this,typeid,"");
 				if(_List.size()>0){
 					handler.sendMessage(handler.obtainMessage(1, _List));
 				}else{

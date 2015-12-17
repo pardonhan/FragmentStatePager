@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity {
     		MsgUtil.ShowErrMsg("用户名和密码不能为空！", LoginActivity.this);
     		return;
     	}
-		
+
 		if ( !NetWorkUtil.isNetworkAvailable(LoginActivity.this)) {
     		MsgUtil.ShowErrMsg("无网络连接！", LoginActivity.this);
     		return;

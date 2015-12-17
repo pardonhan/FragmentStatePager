@@ -376,17 +376,18 @@ containing a value of this type.
         public static final int activity_question_select=0x7f030016;
         public static final int activity_record_exam=0x7f030017;
         public static final int activity_sliding_menu=0x7f030018;
-        public static final int activity_tip_exam=0x7f030019;
-        public static final int activity_titlebar=0x7f03001a;
-        public static final int activity_user_info=0x7f03001b;
-        public static final int listview_question_content=0x7f03001c;
-        public static final int loading_dialog=0x7f03001d;
-        public static final int loading_fullscreen_dialog=0x7f03001e;
-        public static final int msg_dialog=0x7f03001f;
-        public static final int my_dialog=0x7f030020;
-        public static final int popupwindow_dialog=0x7f030021;
-        public static final int splash_screen=0x7f030022;
-        public static final int tip_dialog=0x7f030023;
+        public static final int activity_special_type_item=0x7f030019;
+        public static final int activity_tip_exam=0x7f03001a;
+        public static final int activity_titlebar=0x7f03001b;
+        public static final int activity_user_info=0x7f03001c;
+        public static final int listview_question_content=0x7f03001d;
+        public static final int loading_dialog=0x7f03001e;
+        public static final int loading_fullscreen_dialog=0x7f03001f;
+        public static final int msg_dialog=0x7f030020;
+        public static final int my_dialog=0x7f030021;
+        public static final int popupwindow_dialog=0x7f030022;
+        public static final int splash_screen=0x7f030023;
+        public static final int tip_dialog=0x7f030024;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -453,18 +454,14 @@ containing a value of this type.
         public static final int tip=0x7f09003a;
         public static final int tip_dialog=0x7f09003b;
         public static final int tip_login=0x7f09003c;
-        public static final int title_activity_collect_exam=0x7f09003d;
-        public static final int title_activity_my_wrong_exam=0x7f09003e;
-        public static final int title_activity_record_exam=0x7f09003f;
-        public static final int title_activity_tip_exam=0x7f090040;
-        public static final int true_a=0x7f090041;
-        public static final int undone_exam=0x7f090042;
-        public static final int useTime=0x7f090043;
-        public static final int user_name=0x7f090044;
-        public static final int username=0x7f090045;
-        public static final int webIp=0x7f090046;
-        public static final int wrong_exam=0x7f090047;
-        public static final int zero=0x7f090048;
+        public static final int true_a=0x7f09003d;
+        public static final int undone_exam=0x7f09003e;
+        public static final int useTime=0x7f09003f;
+        public static final int user_name=0x7f090040;
+        public static final int username=0x7f090041;
+        public static final int webIp=0x7f090042;
+        public static final int wrong_exam=0x7f090043;
+        public static final int zero=0x7f090044;
     }
     public static final class style {
         public static final int AnimationFade=0x7f060001;

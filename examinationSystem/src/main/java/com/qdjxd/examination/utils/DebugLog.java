@@ -50,7 +50,7 @@ public class DebugLog {
 	}
 
 	private static void getMethodNames(StackTraceElement[] sElements) {
-		className = sElements[1].getFileName();
+		className = sElements[1].getClassName();
 		methodName = sElements[1].getMethodName();
 		lineNumber = sElements[1].getLineNumber();
 	}

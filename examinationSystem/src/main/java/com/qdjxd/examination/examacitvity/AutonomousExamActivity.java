@@ -43,6 +43,8 @@ import java.util.List;
 public class AutonomousExamActivity extends BaseActivity {
     public static final String TAG = "AutonomousExamActivity";
     public static final String QUESTION_INFO_LIST = "QUESTION_INFO_LIST";
+    private final String type_id = "0";
+    private final String exam_id = "4";
     private CurrentInfo ci = new CurrentInfo();
     private ViewPager mViewPager;
     private Dialog m_Dialog;
@@ -57,7 +59,6 @@ public class AutonomousExamActivity extends BaseActivity {
     private PopupWindow pwMyPopWindow;// popupwindow
     private PopupWindowDialog popDialog;//no next practice dialog
     private PopupWindowDialog startPopDialog;//
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,11 +74,10 @@ public class AutonomousExamActivity extends BaseActivity {
         tv_questionNum.setOnClickListener(listener);
         FragmentManager manager = getFragmentManager();
         questionFragmentList = new ArrayList<QuestionFragment>();
-
         if (questionInfoList != null) {
             int size = questionInfoList.size();
             for (int i = 0; i < size; i++) {
-                questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + ""));
+                questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
             }
         }
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -94,7 +94,7 @@ public class AutonomousExamActivity extends BaseActivity {
         startPopDialog.btn_ok.setOnClickListener(listenerT);
         startPopDialog.btn_cancel.setText("重新开始");
         startPopDialog.btn_cancel.setOnClickListener(listenerT);
-        getExamData(null);
+        getExamData("0");
         mViewPager.setOnPageChangeListener(pListener);
         //最后一题时提示
         popDialog = new PopupWindowDialog(AutonomousExamActivity.this, null);
@@ -130,7 +130,7 @@ public class AutonomousExamActivity extends BaseActivity {
             public void run() {
                 DebugLog.i("查询数据");
                 ArrayList<QuestionInfo> _List;// = new ArrayList<QuestionInfo>();
-                _List = DataBaseUtils.getRandomQuestionInfo(AutonomousExamActivity.this, type_id);
+                _List = DataBaseUtils.getRandomQuestionInfo(AutonomousExamActivity.this, type_id,"");
                 if (_List.size() > 0) {
                     handler.sendMessage(handler.obtainMessage(1, _List));
                 } else {
@@ -159,7 +159,7 @@ public class AutonomousExamActivity extends BaseActivity {
                 if (questionInfoList != null) {
                     int size = questionInfoList.size();
                     for (int i = 0; i < size; i++) {
-                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + ""));
+                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -188,7 +188,7 @@ public class AutonomousExamActivity extends BaseActivity {
                 if (questionInfoList != null) {
                     int size = questionInfoList.size();
                     for (int i = 0; i < size; i++) {
-                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + ""));
+                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
                     }
                 }
                 adapter.notifyDataSetChanged();
