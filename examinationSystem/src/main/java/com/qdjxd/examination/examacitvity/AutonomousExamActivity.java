@@ -77,7 +77,7 @@ public class AutonomousExamActivity extends BaseActivity {
         if (questionInfoList != null) {
             int size = questionInfoList.size();
             for (int i = 0; i < size; i++) {
-                questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
+                questionFragmentList.add(QuestionFragment.newInstance(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
             }
         }
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -159,7 +159,7 @@ public class AutonomousExamActivity extends BaseActivity {
                 if (questionInfoList != null) {
                     int size = questionInfoList.size();
                     for (int i = 0; i < size; i++) {
-                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
+                        questionFragmentList.add( QuestionFragment.newInstance(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -188,7 +188,7 @@ public class AutonomousExamActivity extends BaseActivity {
                 if (questionInfoList != null) {
                     int size = questionInfoList.size();
                     for (int i = 0; i < size; i++) {
-                        questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
+                        questionFragmentList.add(QuestionFragment.newInstance(questionInfoList.get(i), (i + 1) + "",type_id,exam_id));
                     }
                 }
                 adapter.notifyDataSetChanged();

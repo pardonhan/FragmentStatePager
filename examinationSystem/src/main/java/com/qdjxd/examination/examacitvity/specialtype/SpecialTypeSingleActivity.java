@@ -57,13 +57,13 @@ public class SpecialTypeSingleActivity extends BaseActivity{
         if (questionInfoList != null) {
             int size = questionInfoList.size();
             for (int i = 0; i < size; i++) {
-                questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_type));
+                questionFragmentList.add(QuestionFragment.newInstance(questionInfoList.get(i), (i + 1) + "",type_id,exam_type));
             }
         }
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         adapter = new AutoNomousAdapter(manager, questionFragmentList);
         mViewPager.setAdapter(adapter);
-        mViewPager.setOnPageChangeListener(pListener);
+        mViewPager.addOnPageChangeListener(pListener);
     }
 
     ViewPager.OnPageChangeListener pListener = new ViewPager.OnPageChangeListener(){
@@ -118,7 +118,7 @@ public class SpecialTypeSingleActivity extends BaseActivity{
                     if (questionInfoList != null) {
                         int size = questionInfoList.size();
                         for (int i = 0; i < size; i++) {
-                            questionFragmentList.add(new QuestionFragment(questionInfoList.get(i), (i + 1) + "",type_id,exam_type));
+                            questionFragmentList.add(QuestionFragment.newInstance(questionInfoList.get(i), (i + 1) + "",type_id,exam_type));
                         }
                     }
                     adapter.notifyDataSetChanged();

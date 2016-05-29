@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <corners android:topLeftRadius="8dp" android:topRightRadius="8dp" 
-        android:bottomLeftRadius="0dp" android:bottomRightRadius="0dp" />
-    <!-- 实心 -->
-    <solid android:color="@color/bottom_bar_DeepSkyBlue"/>
-
-</shape>
-<!-- From: file:/G:/AndroidStudioProjects/Android_FragmentSample1/examinationSystem/src/main/res/drawable/dialog_head_bg.xml -->

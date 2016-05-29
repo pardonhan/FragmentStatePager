@@ -1,7 +1,0 @@
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\database\DataBaseUtils.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity$5.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity$2.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity$AutoNomousAdapter.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity$3.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity.class
-G:\AndroidStudioProjects\Android_FragmentSample1\examinationSystem\build\intermediates\transforms\instantRun\debug\folders\1\1\main\com\qdjxd\examination\examacitvity\specialtype\SpecialTypeMultiActivity$4.class

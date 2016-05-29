@@ -40,12 +40,19 @@ public class QuestionFragment extends ListFragment {
     private String type_id;
     private String exam_type;
 
-    public QuestionFragment(QuestionInfo qf,String num,String type_id,String exam_type){
-        this.questionInfo = qf;
-        this.answerItem = qf.answerItem;
-        this.num = num;
-        this.type_id = type_id;
-        this.exam_type = exam_type;
+    public QuestionFragment() {
+
+    }
+
+    public static QuestionFragment newInstance(QuestionInfo qf,String num,String type_id,String exam_type){
+        QuestionFragment newFragment = new QuestionFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("QuestionInfo", qf);
+        bundle.putString("num", num);
+        bundle.putString("type_id", type_id);
+        bundle.putString("exam_type", exam_type);
+        newFragment.setArguments(bundle);
+        return newFragment;
     }
 
     @Override
@@ -281,5 +288,4 @@ public class QuestionFragment extends ListFragment {
     private void setTextViewDrawable(TextView tx,int id){
         tx.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getActivity(),id), null, null, null);
     }
-
 }
