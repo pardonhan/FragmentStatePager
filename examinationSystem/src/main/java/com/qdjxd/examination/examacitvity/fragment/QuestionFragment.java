@@ -1,22 +1,18 @@
 package com.qdjxd.examination.examacitvity.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qdjxd.examination.R;
 import com.qdjxd.examination.baseInfo.CurrentInfo;
-import com.qdjxd.examination.examacitvity.AutonomousExamActivity;
 import com.qdjxd.examination.examacitvity.adapter.AnswerListAdapter;
 import com.qdjxd.examination.examacitvity.bean.AnswerInfo;
 import com.qdjxd.examination.examacitvity.bean.QuestionInfo;
@@ -26,7 +22,6 @@ import com.qdjxd.examination.utils.PublicUtils;
 import com.qdjxd.examination.utils.SharedPreferencesHelper;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,8 +31,6 @@ import java.util.List;
 public class QuestionFragment extends ListFragment {
     public static final String TAG = QuestionFragment.class.getSimpleName();
 
-    private View questionView;
-    private View buttonView;
     private AnswerListAdapter adapter;
     private QuestionInfo questionInfo;
     private List<AnswerInfo> answerItem;
@@ -85,25 +78,26 @@ public class QuestionFragment extends ListFragment {
         setListAdapter(null);
         LayoutInflater inflater = getActivity().getLayoutInflater();
         //问题显示页面
-        questionView = inflater.inflate(R.layout.activity_exam_autonomous_item,null);
-        buttonView = inflater.inflate(R.layout.activity_exam_answer_button,null);
+        View questionView = inflater.inflate(R.layout.activity_exam_autonomous_item, null);
+        View buttonView = inflater.inflate(R.layout.activity_exam_answer_button, null);
         Button button = (Button) buttonView.findViewById(R.id.submitAs);
         //题目内容
         TextView questionTx = (TextView) questionView.findViewById(R.id.choose_question_content);
-        questionTx.setText(num + "." + questionInfo.qcontent);
+        String text = num + "." + questionInfo.qcontent;
+        questionTx.setText(text);
 
         //对题目类型进行判断,更改题目类型图标 1 单选，2 多选 3 判断
         if(("1").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    getResources().getDrawable(R.drawable.practise_danxuanti_day), null, null, null);
+                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_danxuanti_day), null, null, null);
         }else if(("2").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    getResources().getDrawable(R.drawable.practise_duoxuanti_day), null, null, null);
+                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_duoxuanti_day), null, null, null);
             button.setVisibility(View.VISIBLE);
             button.setOnClickListener(listener);
         }else if (("3").equals(questionInfo.typeid)){
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    getResources().getDrawable(R.drawable.practise_panduanti_day), null, null, null);
+                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_panduanti_day), null, null, null);
         }
         setListAdapter(adapter);
         getListView().addHeaderView(questionView);
@@ -285,7 +279,7 @@ public class QuestionFragment extends ListFragment {
         }
     }
     private void setTextViewDrawable(TextView tx,int id){
-        tx.setCompoundDrawablesWithIntrinsicBounds(getActivity().getResources().getDrawable(id), null, null, null);
+        tx.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getActivity(),id), null, null, null);
     }
 
 }
