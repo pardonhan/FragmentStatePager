@@ -41,24 +41,19 @@ import java.util.List;
  *
  */
 public class AutonomousExamActivity extends BaseActivity {
-    public static final String TAG = "AutonomousExamActivity";
-    public static final String QUESTION_INFO_LIST = "QUESTION_INFO_LIST";
     private final String type_id = "0";
     private final String exam_id = "4";
     private CurrentInfo ci = new CurrentInfo();
     private ViewPager mViewPager;
-    private Dialog m_Dialog;
     private AutoNomousAdapter adapter;
-    private List<QuestionInfo> questionInfoList = new ArrayList<QuestionInfo>();
-    private List<QuestionInfo> questionInfoList1 = new ArrayList<QuestionInfo>();
+    private List<QuestionInfo> questionInfoList = new ArrayList<>();
+    private List<QuestionInfo> questionInfoList1 = new ArrayList<>();
     private List<QuestionFragment> questionFragmentList;
-    private LinearLayout li_down;//grid_view页面
     private TextView tv_questionNum;
-    private GridView gv_gridview;
-    private ExamGridAdapter egadapter;
     private PopupWindow pwMyPopWindow;// popupwindow
     private PopupWindowDialog popDialog;//no next practice dialog
     private PopupWindowDialog startPopDialog;//
+    private Dialog m_Dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +68,7 @@ public class AutonomousExamActivity extends BaseActivity {
         tv_questionNum = (TextView) findViewById(R.id.tv_question_num);
         tv_questionNum.setOnClickListener(listener);
         FragmentManager manager = getFragmentManager();
-        questionFragmentList = new ArrayList<QuestionFragment>();
+        questionFragmentList = new ArrayList<>();
         if (questionInfoList != null) {
             int size = questionInfoList.size();
             for (int i = 0; i < size; i++) {
@@ -95,7 +90,7 @@ public class AutonomousExamActivity extends BaseActivity {
         startPopDialog.btn_cancel.setText("重新开始");
         startPopDialog.btn_cancel.setOnClickListener(listenerT);
         getExamData("0");
-        mViewPager.setOnPageChangeListener(pListener);
+        mViewPager.addOnPageChangeListener(pListener);
         //最后一题时提示
         popDialog = new PopupWindowDialog(AutonomousExamActivity.this, null);
         popDialog.btn_ok.setOnClickListener(listener);
@@ -236,13 +231,13 @@ public class AutonomousExamActivity extends BaseActivity {
         View layout = inflater.inflate(R.layout.activity_gridview_exam, null);
         RelativeLayout title_re = (RelativeLayout) layout.findViewById(R.id.title_re);
         title_re.getBackground().setAlpha(180);//set titlebar background diaphaneity
-        li_down = (LinearLayout) layout.findViewById(R.id.answer_card);
+        LinearLayout li_down = (LinearLayout) layout.findViewById(R.id.answer_card);
         li_down.setOnClickListener(listener);
-        gv_gridview = (GridView) layout.findViewById(R.id.gview);
+        GridView gv_gridview = (GridView) layout.findViewById(R.id.gview);
         pwMyPopWindow = new PopupWindow(layout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         pwMyPopWindow.setFocusable(true);
         pwMyPopWindow.setAnimationStyle(R.style.AnimationFade);//set Animation
-        egadapter = new ExamGridAdapter(AutonomousExamActivity.this);
+        ExamGridAdapter egadapter = new ExamGridAdapter(AutonomousExamActivity.this);
         gv_gridview.setAdapter(egadapter);
     }
 

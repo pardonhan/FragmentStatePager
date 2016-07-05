@@ -1,4 +1,4 @@
-/*
+/**
  * 文件名：DownLoadExamActivity
  * 版权：
  * 描述：用于下载试题
@@ -32,68 +32,68 @@ import com.qdjxd.examination.utils.MsgUtil;
 import com.qdjxd.examination.utils.WebservicesUtil;
 
 public class DownLoadExamActivity extends BaseActivity {
-	private ListView listview_download;
-	private DownloadListViewAdapter dllvAdapter;
-	private ArrayList<HashMap<String,String>> mList = new ArrayList<HashMap<String,String>>();
-	private Dialog m_Dialog;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_download_exam);
-		this.findViewById(R.id.back).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				finish();
-			}
-		});
-		listview_download = (ListView) findViewById(R.id.downList);
-		dllvAdapter = new DownloadListViewAdapter(DownLoadExamActivity.this,mList,sp);
-		listview_download.setAdapter(dllvAdapter);
-		if(BaseInfo.IsLogin(sp)){
-			getExamClassid();
-		}else{
-			MsgUtil.ShowErrMsg("请先登录！", DownLoadExamActivity.this);
-		}
-	}
-	private void getExamClassid(){
-		if(m_Dialog == null){
-			m_Dialog = MsgUtil.ShowLoadDialog(this, "请等待...", "正在获取数据，请稍候...",true);
-		}
-		else{
-			m_Dialog.show();
-		}
-		new Thread() {
-			@Override
-			public void run() {
-				List<Object> params = new ArrayList<Object>();
-				Object soapObject =  WebservicesUtil.CallDotNetWebService(DownLoadExamActivity.this,"GetExamClassid",params);
-				try{
-					ArrayList<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
-					Gson gs = new Gson();
-					aList = gs.fromJson(soapObject.toString(),new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
-					handler.sendMessage(handler.obtainMessage(1, aList));
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				super.run();
-			}
-    	}.start();
-	}
-	
-	Handler handler = new Handler(){
-		@SuppressWarnings("unchecked")
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			if (msg.what == 1) {
-				if (m_Dialog != null){
-					m_Dialog.dismiss();
-				}
-				mList.clear();
-				mList.addAll((ArrayList<HashMap<String, String>>) msg.obj);
-				dllvAdapter.notifyDataSetChanged();
-			}
-		}
-	};
+    private DownloadListViewAdapter dllvAdapter;
+    private ArrayList<HashMap<String, String>> mList = new ArrayList<>();
+    private Dialog m_Dialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_download_exam);
+        this.findViewById(R.id.back).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                finish();
+            }
+        });
+        ListView listview_download = (ListView) findViewById(R.id.downList);
+        dllvAdapter = new DownloadListViewAdapter(DownLoadExamActivity.this, mList, sp);
+        listview_download.setAdapter(dllvAdapter);
+        if (BaseInfo.IsLogin(sp)) {
+            getExamClassid();
+        } else {
+            MsgUtil.ShowErrMsg("请先登录！", DownLoadExamActivity.this);
+        }
+    }
+
+    private void getExamClassid() {
+        if (m_Dialog == null) {
+            m_Dialog = MsgUtil.ShowLoadDialog(this, "请等待...", "正在获取数据，请稍候...", true);
+        } else {
+            m_Dialog.show();
+        }
+        new Thread() {
+            @Override
+            public void run() {
+                List<Object> params = new ArrayList<>();
+                Object soapObject = WebservicesUtil.CallDotNetWebService(DownLoadExamActivity.this, "GetExamClassid", params);
+                try {
+                    ArrayList<HashMap<String, String>> aList;//
+                    Gson gs = new Gson();
+                    aList = gs.fromJson(soapObject.toString(), new TypeToken<ArrayList<HashMap<String, String>>>() {
+                    }.getType());
+                    handler.sendMessage(handler.obtainMessage(1, aList));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                super.run();
+            }
+        }.start();
+    }
+
+    Handler handler = new Handler() {
+        @SuppressWarnings("unchecked")
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1) {
+                if (m_Dialog != null) {
+                    m_Dialog.dismiss();
+                }
+                mList.clear();
+                mList.addAll((ArrayList<HashMap<String, String>>) msg.obj);
+                dllvAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 }

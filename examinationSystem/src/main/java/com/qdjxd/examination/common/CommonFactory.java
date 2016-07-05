@@ -5,7 +5,7 @@ import com.qdjxd.examination.utils.SharedPreferencesHelper;
 
 
 public class CommonFactory {
-	public static Common getCommon(SharedPreferencesHelper sp) {
-			return new WebServicesCommonImpl();
-	}
+    public static Common getCommon(SharedPreferencesHelper sp) {
+        return new WebServicesCommonImpl();
+    }
 }

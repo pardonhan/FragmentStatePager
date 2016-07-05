@@ -6,6 +6,6 @@ import android.content.Context;
 
 
 public interface Common {
-	public boolean login(Context context, String username, String pwd,
-			SharedPreferencesHelper sp);
+    boolean login(Context context, String username, String pwd,
+                  SharedPreferencesHelper sp);
 }
