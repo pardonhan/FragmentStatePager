@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:contentDescription="@string/app_name"
             android:padding="10dip"
             android:src="@drawable/paper_test" />
@@ -58,7 +58,7 @@
             android:id="@+id/img_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="end|center_vertical"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="20dip"
             android:contentDescription="@string/app_name"
