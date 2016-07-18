@@ -1,0 +1,20 @@
+ext {
+    android = [
+            compileSdkVersion: 23,
+            buildToolsVersion: '23.0.3',
+            applicationId    : "com.qdjxd.examination",
+            minSdkVersion    : 15,
+            targetSdkVersion : 23,
+            versionCode      : 1,
+            versionName      : '1.0.0'
+    ]
+    dependencies = [
+            'appcompat-v7'        : 'com.android.support:appcompat-v7:23.4.0',
+            'support-v13'         : 'com.android.support:support-v13:23.4.0',
+            'gson'                : 'com.google.code.gson:gson:2.4',
+            'sugar'               : 'com.github.satyan:sugar:1.5',
+            'eventbus'            : 'org.greenrobot:eventbus:3.0.0',
+            'butterknife'         : 'com.jakewharton:butterknife:8.1.0',
+            'butterknife-compiler': 'com.jakewharton:butterknife-compiler:8.1.0'
+    ]
+}

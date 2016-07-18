@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * Created by asus on 2015/11/05.
- *
+ * 问题展示页面
  */
 public class QuestionFragment extends ListFragment {
     public static final String TAG = QuestionFragment.class.getSimpleName();
@@ -34,7 +34,7 @@ public class QuestionFragment extends ListFragment {
     private AnswerListAdapter adapter;
     private QuestionInfo questionInfo;
     private List<AnswerInfo> answerItem;
-    private final List<String> list = Arrays.asList("正确","错误");
+    private final List<String> list = Arrays.asList("正确", "错误");
     private String num;
     private boolean[] select;
     private String type_id;
@@ -44,7 +44,7 @@ public class QuestionFragment extends ListFragment {
 
     }
 
-    public static QuestionFragment newInstance(QuestionInfo qf,String num,String type_id,String exam_type){
+    public static QuestionFragment newInstance(QuestionInfo qf, String num, String type_id, String exam_type) {
         QuestionFragment newFragment = new QuestionFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("QuestionInfo", qf);
@@ -60,23 +60,23 @@ public class QuestionFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         DebugLog.i(TAG);
         Activity activity = getActivity();
-        select = new boolean[]{false,false,false,false,false};
-        if(answerItem.size()==0){
-            for(int i=0;i<list.size();i++) {
+        select = new boolean[]{false, false, false, false, false};
+        if (answerItem.size() == 0) {
+            for (int i = 0; i < list.size(); i++) {
                 AnswerInfo answerInfo = new AnswerInfo();
                 answerInfo.itemcontent = list.get(i);
-                switch (i){
+                switch (i) {
                     case 0:
-                        answerInfo.itemvalue ="A";
+                        answerInfo.itemvalue = "A";
                         break;
                     case 1:
-                        answerInfo.itemvalue ="B";
+                        answerInfo.itemvalue = "B";
                         break;
                 }
                 answerItem.add(answerInfo);
             }
         }
-        adapter = new AnswerListAdapter(activity,questionInfo);
+        adapter = new AnswerListAdapter(activity, questionInfo);
     }
 
     @Override
@@ -94,17 +94,17 @@ public class QuestionFragment extends ListFragment {
         questionTx.setText(text);
 
         //对题目类型进行判断,更改题目类型图标 1 单选，2 多选 3 判断
-        if(("1").equals(questionInfo.typeid)){
+        if (("1").equals(questionInfo.typeid)) {
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_danxuanti_day), null, null, null);
-        }else if(("2").equals(questionInfo.typeid)){
+                    ContextCompat.getDrawable(getActivity(), R.drawable.practise_danxuanti_day), null, null, null);
+        } else if (("2").equals(questionInfo.typeid)) {
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_duoxuanti_day), null, null, null);
+                    ContextCompat.getDrawable(getActivity(), R.drawable.practise_duoxuanti_day), null, null, null);
             button.setVisibility(View.VISIBLE);
             button.setOnClickListener(listener);
-        }else if (("3").equals(questionInfo.typeid)){
+        } else if (("3").equals(questionInfo.typeid)) {
             questionTx.setCompoundDrawablesWithIntrinsicBounds(
-                    ContextCompat.getDrawable(getActivity(),R.drawable.practise_panduanti_day), null, null, null);
+                    ContextCompat.getDrawable(getActivity(), R.drawable.practise_panduanti_day), null, null, null);
         }
         setListAdapter(adapter);
         getListView().addHeaderView(questionView);
@@ -117,12 +117,12 @@ public class QuestionFragment extends ListFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView tx = (TextView) view.findViewById(R.id.item_answer);
                 int length = select.length;
-                if(!(("2").equals(questionInfo.typeid))) {
-                    DebugLog.i("questionInfo.wrongModel="+questionInfo.wrongModel);
+                if (!(("2").equals(questionInfo.typeid))) {
+                    DebugLog.i("questionInfo.wrongModel=" + questionInfo.wrongModel);
                     //更改点击项
-                    if(questionInfo.wrongModel==3){
-                        setTextView(tx, position, select[position-1]);
-                        select[position-1] = true;
+                    if (questionInfo.wrongModel == 3) {
+                        setTextView(tx, position, select[position - 1]);
+                        select[position - 1] = true;
                         //记录选项
                         for (int i = 0; i < length; ++i) {
                             //DebugLog.i("记录选项");
@@ -136,8 +136,8 @@ public class QuestionFragment extends ListFragment {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (questionInfo.selectAnswer.size()>0) {
-                                    if(questionInfo.selectAnswer.size()>0) {
+                                if (questionInfo.selectAnswer.size() > 0) {
+                                    if (questionInfo.selectAnswer.size() > 0) {
                                         if (PublicUtils.isSetEqual(questionInfo.selectAnswer, questionInfo.answer)) {
                                             questionInfo.wrongModel = 1;
                                         } else {
@@ -150,9 +150,9 @@ public class QuestionFragment extends ListFragment {
                             }
                         }, 400);
                     }
-                }else{
+                } else {
                     // 多选题
-                    if(questionInfo.wrongModel==3){
+                    if (questionInfo.wrongModel == 3) {
                         for (int i = 0; i < length; i++) {
                             //对当前点击项目做出判断
                             if ((i + 1) == position) {
@@ -187,14 +187,14 @@ public class QuestionFragment extends ListFragment {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.submitAs:
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             DebugLog.i("listener");
-                            if (questionInfo.selectAnswer.size()>0) {
-                                if(questionInfo.selectAnswer.size()>0) {
+                            if (questionInfo.selectAnswer.size() > 0) {
+                                if (questionInfo.selectAnswer.size() > 0) {
                                     if (PublicUtils.isSetEqual(questionInfo.selectAnswer, questionInfo.answer)) {
                                         questionInfo.wrongModel = 1;
                                     } else {
@@ -208,84 +208,78 @@ public class QuestionFragment extends ListFragment {
                     }, 400);
                     break;
             }
-
         }
     };
+
     @Override
     public void onPause() {
         super.onPause();
-        DebugLog.i("onPause:"+questionInfo.qcontent);
-        if(questionInfo.wrongModel!=3&&questionInfo.selectAnswer.size()>0){
+        DebugLog.i("onPause:" + questionInfo.qcontent);
+        if (questionInfo.wrongModel != 3 && questionInfo.selectAnswer.size() > 0) {
             CurrentInfo currentInfo = new CurrentInfo();
             SharedPreferencesHelper sp = SharedPreferencesHelper.getDefault(getActivity());
-            currentInfo.setAutoExam(sp,Integer.parseInt(num));
-            new Thread(){
+            currentInfo.setAutoExam(sp, Integer.parseInt(num));
+            new Thread() {
                 public void run() {
-                    DataBaseUtils.saveExamResult(getActivity(),
-                            questionInfo, type_id, exam_type);
+                    DataBaseUtils.saveExamResult(getActivity(), questionInfo, type_id, exam_type);
                 }
             }.start();
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
     /**
-     *
-     * @param tx 当前选项
-     * @param position  选项标志位
-     * @param flag  是否选中：flag==true执行else，flag==false执行if
+     * @param tx       当前选项
+     * @param position 选项标志位
+     * @param flag     是否选中：flag==true执行else，flag==false执行if
      */
-    private void setTextView(TextView tx,int position,boolean flag){
-        switch (position){
+    private void setTextView(TextView tx, int position, boolean flag) {
+        switch (position) {
             case 1:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_a_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_a_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_a_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_a_s_day);
                 }
                 break;
             case 2:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_b_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_b_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_b_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_b_s_day);
                 }
                 break;
             case 3:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_c_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_c_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_c_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_c_s_day);
                 }
                 break;
             case 4:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_d_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_d_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_d_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_d_s_day);
                 }
                 break;
             case 5:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_e_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_e_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_e_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_e_s_day);
                 }
                 break;
             case 6:
-                if(flag){
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_f_n_day);
-                }else{
-                    setTextViewDrawable(tx,R.drawable.jiakao_practise_f_s_day);
+                if (flag) {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_f_n_day);
+                } else {
+                    setTextViewDrawable(tx, R.drawable.jiakao_practise_f_s_day);
                 }
                 break;
         }
     }
-    private void setTextViewDrawable(TextView tx,int id){
-        tx.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getActivity(),id), null, null, null);
+
+    private void setTextViewDrawable(TextView tx, int id) {
+        tx.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(getActivity(), id), null, null, null);
     }
 }

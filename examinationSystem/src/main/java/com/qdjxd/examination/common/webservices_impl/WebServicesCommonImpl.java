@@ -17,13 +17,10 @@ import android.content.Context;
 
 public class WebServicesCommonImpl implements Common {
     @Override
-    public boolean login(Context context, String usercode, String pwd,
-                         SharedPreferencesHelper sp) {
+    public boolean login(Context context, String usercode, String pwd,SharedPreferencesHelper sp) {
         List<Object> params = new ArrayList<>();
         params.add(usercode);
         params.add(pwd);
-        DebugLog.i(usercode);
-        DebugLog.i(pwd);
         Object soapObject = WebservicesUtil.CallDotNetWebService(context, "UserLogin", params);
         if (!soapObject.equals("0")) {
             try {

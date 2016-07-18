@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,13 +31,13 @@ public class DataBaseUtils {
     /**
      * 获取到所有题目，用于模拟考试
      *
-     * @param context
-     * @param typeid
-     * @return
+     * @param context context
+     * @param typeid  typeid
+     * @return list
      */
     public static ArrayList<QuestionInfo> getAllQuestions(Context context, String typeid) {
-        ArrayList<QuestionInfo> qList = new ArrayList<QuestionInfo>();
-        String sql = "";
+        ArrayList<QuestionInfo> qList = new ArrayList<>();
+        String sql;
         if (typeid.equals("0")) {
             sql = "SELECT * FROM JXD7_EX_QUESTION ORDER BY QUESTIONID";
         } else {
@@ -52,13 +53,11 @@ public class DataBaseUtils {
                 qf.typeid = cs.getString(cs.getColumnIndex("TYPEID"));
                 qf.qcontent = cs.getString(cs.getColumnIndex("QCONTENT"));
                 String[] as = cs.getString(cs.getColumnIndex("ANSWER")).split(",");
-                for (String a : as) {
-                    qf.answer.add(a);
-                }
+                Collections.addAll(qf.answer, as);
 
                 String sql2 = "SELECT * FROM JXD7_EX_ANSWERITEM WHERE QUESTIONID='" + qf.questionid + "'";
                 Cursor css = db.queryData(sql2);
-                qf.answerItem = new ArrayList<AnswerInfo>();
+                qf.answerItem = new ArrayList<>();
                 if (css != null) {
                     while (css.moveToNext()) {
                         AnswerInfo af = new AnswerInfo();
@@ -79,23 +78,23 @@ public class DataBaseUtils {
 
 
     /**
-     * @param context
+     * @param context   context
      * @param type_id   题目类型
      * @param exam_type 考试类型
-     * @return
+     * @return list
      */
     public static ArrayList<QuestionInfo> getRandomQuestionInfo(Context context, String type_id, String exam_type) {
         String[] ans = {"正确", "错误"};
         String[] iValue = {"1", "0"};
-        ArrayList<QuestionInfo> qList = new ArrayList<QuestionInfo>();
-        String sql = "";
+        ArrayList<QuestionInfo> qList = new ArrayList<>();
+        String sql;
         if (type_id != null) {
             if (type_id.equals("0")) {
                 sql = "SELECT * FROM JXD7_EX_QUESTION ORDER BY QUESTIONID";
             } else {
                 sql = "SELECT * FROM JXD7_EX_QUESTION WHERE TYPEID=" + type_id + " ORDER BY QUESTIONID";
             }
-        } else if (type_id == null) {
+        } else {
             sql = "SELECT * FROM JXD7_EX_QUESTION ORDER BY QUESTIONID";
         }
         DebugLog.i(sql);
@@ -109,14 +108,12 @@ public class DataBaseUtils {
                 qf.typeid = cs.getString(cs.getColumnIndex("TYPEID"));
                 qf.qcontent = cs.getString(cs.getColumnIndex("QCONTENT"));
                 String[] as = cs.getString(cs.getColumnIndex("ANSWER")).split(",");
-                for (String a : as) {
-                    qf.answer.add(a);
-                }
+                Collections.addAll(qf.answer, as);
 
-                StringBuffer sql2 = new StringBuffer("SELECT * FROM JXD7_EX_ANSWERITEM WHERE QUESTIONID='" + qf.questionid + "'");
-                DebugLog.i("查询答案信息--->"+sql2);
+                StringBuilder sql2 = new StringBuilder("SELECT * FROM JXD7_EX_ANSWERITEM WHERE QUESTIONID='" + qf.questionid + "'");
+                DebugLog.i("查询答案信息--->" + sql2);
                 Cursor css = db.queryData(sql2.toString());
-                qf.answerItem = new ArrayList<AnswerInfo>();
+                qf.answerItem = new ArrayList<>();
                 if (css != null) {
                     while (css.moveToNext()) {
                         AnswerInfo af = new AnswerInfo();
@@ -144,20 +141,18 @@ public class DataBaseUtils {
         DataBaseHelper dbLocal = new DataBaseHelper(context, DataBaseHelper.DB_NAME_LOCAL);
         dbLocal.openDataBase();
         for (QuestionInfo que : qList) {
-            StringBuffer sqlResult = new StringBuffer("SELECT * FROM JXD7_EX_RESULT WHERE QUESTIONID='");
+            StringBuilder sqlResult = new StringBuilder("SELECT * FROM JXD7_EX_RESULT WHERE QUESTIONID='");
             //EXAM_TYPE_ID 表示哪个模块
-            sqlResult.append(que.questionid + "' AND EXAM_TYPE_ID = '" + exam_type + "'");
-            if (!type_id.equals("0")) {
-                sqlResult.append(" AND QUESTION_TYPE_ID= '" + type_id + "'");
+            sqlResult.append(que.questionid).append("' AND EXAM_TYPE_ID = '").append(exam_type).append("'");
+            if (!(type_id != null && type_id.equals("0"))) {
+                sqlResult.append(" AND QUESTION_TYPE_ID= '").append(type_id).append("'");
             }
-            DebugLog.i("查询答题结果--->"+sqlResult);
+            DebugLog.i("查询答题结果--->" + sqlResult);
             Cursor cr = dbLocal.queryData(sqlResult.toString());
             if (cr.getCount() > 0) {
                 cr.moveToFirst();
                 String[] as = cr.getString(cr.getColumnIndex("SELECTANSWER")).split(",");
-                for (String a : as) {
-                    que.selectAnswer.add(a);
-                }
+                Collections.addAll(que.selectAnswer, as);
                 que.wrongModel = cr.getInt(cr.getColumnIndex("WRONGMODEL"));
             }
             cr.close();
@@ -169,11 +164,11 @@ public class DataBaseUtils {
     /**
      * 按照题目类型获取题目
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return list
      */
     public static ArrayList<QuestionInfo> getOrdinalQuestionInfo(Context context) {
-        ArrayList<QuestionInfo> qList = new ArrayList<QuestionInfo>();
+        ArrayList<QuestionInfo> qList = new ArrayList<>();
         String sql = "SELECT * FROM JXD7_EX_QUESTION ORDER BY TYPEID";
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_BASE);
         db.openDataBase();
@@ -185,12 +180,10 @@ public class DataBaseUtils {
                 qf.typeid = cs.getString(cs.getColumnIndex("TYPEID"));
                 qf.qcontent = cs.getString(cs.getColumnIndex("QCONTENT"));
                 String[] as = cs.getString(cs.getColumnIndex("ANSWER")).split(",");
-                for (String a : as) {
-                    qf.answer.add(a);
-                }
+                Collections.addAll(qf.answer, as);
                 String sql2 = "SELECT * FROM JXD7_EX_ANSWERITEM WHERE QUESTIONID='" + qf.questionid + "'";
                 Cursor css = db.queryData(sql2);
-                qf.answerItem = new ArrayList<AnswerInfo>();
+                qf.answerItem = new ArrayList<>();
                 if (css != null) {
                     while (css.moveToNext()) {
                         AnswerInfo af = new AnswerInfo();
@@ -215,9 +208,7 @@ public class DataBaseUtils {
             if (cr.getCount() > 0) {
                 cr.moveToFirst();
                 String[] as = cr.getString(cr.getColumnIndex("SELECTANSWER")).split(",");
-                for (String a : as) {
-                    que.selectAnswer.add(a);
-                }
+                Collections.addAll(que.selectAnswer, as);
                 que.wrongModel = cr.getInt(cr.getColumnIndex("WRONGMODEL"));
             }
             cr.close();
@@ -230,8 +221,8 @@ public class DataBaseUtils {
     /**
      * 向数据库中插入新的数据
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return boolean
      */
     public static boolean insertIntoNewInfo(Context context) {
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_BASE);
@@ -244,10 +235,10 @@ public class DataBaseUtils {
         if (!file.exists() || file.length() <= 0) {
             return false;
         }
-        BufferedReader bReader = null;
+        BufferedReader bReader;
         try {
             bReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "GBK"));
-            String sql = "";
+            String sql;
             while ((sql = bReader.readLine()) != null) {
                 sql = sql.trim();
                 DebugLog.v(sql);
@@ -261,10 +252,12 @@ public class DataBaseUtils {
     }
 
     /**
-     *
+     * 获取练习题
+     * @param context context
+     * @return list
      */
     public static ArrayList<QuestionInfo> getPracticeQuestionInfo(Context context) {
-        ArrayList<QuestionInfo> qList = new ArrayList<QuestionInfo>();
+        ArrayList<QuestionInfo> qList = new ArrayList<>();
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_BASE);
         db.openDataBase();
         //String sql = "";
@@ -275,13 +268,13 @@ public class DataBaseUtils {
      * 问题查询方法
      * 根据输入的关键字查询问题结果
      *
-     * @param context
-     * @param selectText
-     * @return
+     * @param context    context
+     * @param selectText selectText
+     * @return list
      */
     public static ArrayList<QuestionInfo> getSelectQuestion(Context context, String selectText) {
         DebugLog.v(selectText);
-        ArrayList<QuestionInfo> mList = new ArrayList<QuestionInfo>();
+        ArrayList<QuestionInfo> mList = new ArrayList<>();
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_BASE);
         db.openDataBase();
         String seaerchSql = "SELECT * FROM JXD7_EX_QUESTION WHERE QCONTENT LIKE '%" + selectText + "%' ORDER BY TYPEID";
@@ -293,12 +286,10 @@ public class DataBaseUtils {
                 qf.typeid = cs.getString(cs.getColumnIndex("TYPEID"));
                 qf.qcontent = cs.getString(cs.getColumnIndex("QCONTENT"));
                 String[] as = cs.getString(cs.getColumnIndex("ANSWER")).split(",");
-                for (String a : as) {
-                    qf.answer.add(a);
-                }
+                Collections.addAll(qf.answer, as);
                 String sql2 = "SELECT * FROM JXD7_EX_ANSWERITEM WHERE QUESTIONID='" + qf.questionid + "'";
                 Cursor css = db.queryData(sql2);
-                qf.answerItem = new ArrayList<AnswerInfo>();
+                qf.answerItem = new ArrayList<>();
                 if (css != null) {
                     while (css.moveToNext()) {
                         AnswerInfo af = new AnswerInfo();
@@ -320,26 +311,31 @@ public class DataBaseUtils {
     /**
      * 将答题结果插入到数据库中
      *
-     * @param context
-     * @param mList
+     * @param context context
+     * @param mList   mList
      */
     public static void insertResult(Context context, ArrayList<QuestionInfo> mList, String flag) {
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_LOCAL);
         db.openDataBase();
-        StringBuffer sb = new StringBuffer("INSERT INTO JXD7_EX_RESULT(ID,EXAMNAME) VALUES(");
-        sb.append("'" + UUID.randomUUID().toString().toUpperCase() + "',");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sb.append("'" + sdf.format(new Date()) + "')");
-        DebugLog.v(sb);
-        db.execNonQuery(sb.toString());
-        db.close();
+        try{
+            StringBuffer sb = new StringBuffer("INSERT INTO JXD7_EX_RESULT(ID,EXAMNAME) VALUES(");
+            sb.append("'").append(UUID.randomUUID().toString().toUpperCase()).append("',");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sb.append("'").append(sdf.format(new Date())).append("')");
+            DebugLog.v(sb);
+            db.execNonQuery(sb.toString());
+            db.close();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            db.close();
+        }
     }
 
     /**
      * 保存问题答案
      *
-     * @param context
-     * @param questioninfo
+     * @param context      context
+     * @param questioninfo questioninfo
      * @param type_id      题目类型
      * @param exam_type    考试类型
      */
@@ -348,28 +344,27 @@ public class DataBaseUtils {
         db.openDataBase();
         //如果对这个题目做出了答案
         if (questioninfo.wrongModel != 3) {
-            StringBuffer deleteSql = new StringBuffer("DELETE FROM JXD7_EX_RESULT WHERE QUESTIONID = '" + questioninfo.questionid + "'");
+            StringBuilder deleteSql = new StringBuilder("DELETE FROM JXD7_EX_RESULT WHERE QUESTIONID = '" + questioninfo.questionid + "'");
             if (!type_id.equals("0")) {
-                deleteSql.append(" AND QUESTION_TYPE_ID = '" + type_id + "'");
+                deleteSql.append(" AND QUESTION_TYPE_ID = '").append(type_id).append("'");
             }
-            deleteSql.append(" AND EXAM_TYPE_ID= '" + exam_type + "'");
+            deleteSql.append(" AND EXAM_TYPE_ID= '").append(exam_type).append("'");
             db.execNonQuery(deleteSql.toString());
             StringBuffer sb = new StringBuffer("INSERT INTO JXD7_EX_RESULT");
             sb.append("(QUESTIONID,SELECTANSWER,WRONGMODEL,QUESTION_TYPE_ID,EXAM_TYPE_ID)" + " VALUES");
-            sb.append("('" + questioninfo.questionid + "','");
+            sb.append("('").append(questioninfo.questionid).append("','");
             if (questioninfo.selectAnswer.size() == 1) {
                 Iterator<String> ite2 = questioninfo.selectAnswer.iterator();
-                sb.append(ite2.next() + "'");
+                sb.append(ite2.next()).append("'");
             } else {
-                Iterator<String> ite2 = questioninfo.selectAnswer.iterator();
-                while (ite2.hasNext()) {
-                    sb.append(ite2.next() + ",");
+                for (String aSelectAnswer : questioninfo.selectAnswer) {
+                    sb.append(aSelectAnswer).append(",");
                 }
                 sb.append("'");
             }
-            sb.append(",'" + questioninfo.wrongModel);
-            sb.append("','" + type_id);
-            sb.append("','" + exam_type);
+            sb.append(",'").append(questioninfo.wrongModel);
+            sb.append("','").append(type_id);
+            sb.append("','").append(exam_type);
             sb.append("')");
             DebugLog.i(sb);
             db.execNonQuery(sb.toString());
@@ -378,9 +373,9 @@ public class DataBaseUtils {
     }
 
     /**
-     * @param context
-     * @param _List
-     * @param tableName
+     * @param context   context
+     * @param _List     _List
+     * @param tableName tableName
      */
     public static void deleteExamResult(Context context, List<QuestionInfo> _List, String tableName) {
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_LOCAL);
@@ -399,7 +394,7 @@ public class DataBaseUtils {
 
     public static Map<String, String> selectNumbers(Context context) {
         int allNum = 0;
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         //获取题目总数 begin
         DataBaseHelper db = new DataBaseHelper(context, DataBaseHelper.DB_NAME_BASE);
         db.openDataBase();
@@ -408,7 +403,6 @@ public class DataBaseUtils {
         if (cs.getCount() > 0) {
             cs.moveToFirst();
             allNum = Integer.parseInt(cs.getString(cs.getColumnIndex("NUMBER")));
-            //map.put("allNum",allNum);
             cs.close();
         }
         db.close();
