@@ -52,13 +52,13 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements OnClickListener {
 
     @BindView(R.id.id_menuss)
-     SlidingMenu menu;
+    SlidingMenu menu;
 
     @BindView(R.id.user_name)
-     TextView user_name;
+    TextView user_name;
 
     @BindView(R.id.menu_tip)
-     TextView menu_tip;
+    TextView menu_tip;
 
     @BindView(R.id.exam_tip)
     TextView exam_tip;
@@ -71,7 +71,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
     @BindView(R.id.my_collect)
     TextView my_collect;
-
     //底部菜单
     @BindView(R.id.right_num)
     TextView right_num;
@@ -85,6 +84,21 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     @BindView(R.id.collect_num)
     TextView collect_num;
 
+    @BindView(R.id.Turn_menu)
+    CircleImageView turn_menu;
+
+    @BindView(R.id.user_login)
+    LinearLayout userLogin;
+
+    @BindView(R.id.download_exam)
+    LinearLayout li_downloadExam;
+
+    @BindView(R.id.param_setting)
+    LinearLayout paramSetting;
+
+    @BindView(R.id.gossipview)
+    GossipView gossipView;
+
     private final int logout_result = 1025;
     private final int random_result = 1026;
 
@@ -94,16 +108,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ButterKnife.bind(this);
-
-        CircleImageView turn_menu = (CircleImageView) findViewById(R.id.Turn_menu);
-        turn_menu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                menu.toggle();
-            }
-        });
+        turn_menu.setOnClickListener(this);
         initView();
         MyAsyncTask myAsyncTask = new MyAsyncTask();
         myAsyncTask.execute();
@@ -120,22 +126,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     }
 
     private void initView() {
-        LinearLayout userLogin = (LinearLayout) findViewById(R.id.user_login);
         userLogin.setOnClickListener(this);
         if (BaseInfo.IsLogin(sp)) {
             DebugLog.i(UserInfo.getUserAlias(sp));
             user_name.setText(UserInfo.getUserAlias(sp));
             menu_tip.setText(R.string.tip_login);
         }
-
-        LinearLayout li_downloadExam = (LinearLayout) findViewById(R.id.download_exam);
         li_downloadExam.setOnClickListener(this);
-
-        LinearLayout paramSetting = (LinearLayout) findViewById(R.id.param_setting);
         paramSetting.setOnClickListener(this);
 
 
-        GossipView gossipView = (GossipView) findViewById(R.id.gossipview);
         final List<GossipItem> items = new ArrayList<>();
         for (String str : strs) {
             GossipItem item = new GossipItem(str, 1);
@@ -216,6 +216,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         }
     };
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode) {
             case RESULT_OK:
@@ -238,6 +239,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.Turn_menu:
+                menu.toggle();
+                break;
             case R.id.user_login:
                 //判断是登录还是进入用户信息页面
                 if (BaseInfo.IsLogin(sp)) {

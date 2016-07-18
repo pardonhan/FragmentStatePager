@@ -61,7 +61,7 @@ public class QuestionFragment extends ListFragment {
         DebugLog.i(TAG);
         Activity activity = getActivity();
         select = new boolean[]{false, false, false, false, false};
-        if (answerItem.size() == 0) {
+        if ( answerItem.size() == 0) {
             for (int i = 0; i < list.size(); i++) {
                 AnswerInfo answerInfo = new AnswerInfo();
                 answerInfo.itemcontent = list.get(i);

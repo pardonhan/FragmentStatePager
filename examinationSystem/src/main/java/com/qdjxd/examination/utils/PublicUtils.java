@@ -9,6 +9,21 @@ import java.util.Set;
 
 public class PublicUtils {
     /**
+     * 检查ip地址是否正确
+     */
+    public static boolean checkIP(String ipStr) {
+        if ("".equals(ipStr)) {
+
+            return false;
+        }
+        String[] ip = ipStr.split(":");
+        String regex = "^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."
+                + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
+                + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
+                + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$";
+        return ip[0].matches(regex);
+    }
+    /**
      * 生成指定范围的指定个数的不重复的随机数
      * 返回一个List保存已经生成的随机数
      *

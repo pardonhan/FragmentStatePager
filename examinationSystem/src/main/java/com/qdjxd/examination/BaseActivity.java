@@ -1,15 +1,11 @@
 package com.qdjxd.examination;
 
-import java.io.File;
 
 import com.qdjxd.examination.utils.DensityUtil;
 import com.qdjxd.examination.utils.SharedPreferencesHelper;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 
 public class BaseActivity extends Activity {
 	/**

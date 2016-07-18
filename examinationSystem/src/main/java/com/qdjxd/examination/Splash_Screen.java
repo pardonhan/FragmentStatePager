@@ -16,9 +16,7 @@ public class Splash_Screen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFormat(PixelFormat.RGB_888);
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
-
         setContentView(R.layout.splash_screen);
         PackageManager pm = getPackageManager();
         try {
